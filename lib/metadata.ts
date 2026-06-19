@@ -19,9 +19,9 @@ export const PAGE_METADATA = {
       "WhatsApp recovery and support with high open rates. Automate cart recovery and customer conversations.",
   },
   youtube: {
-    title: "YouTube Automation",
+    title: "YouTube Automation Services",
     description:
-      "Content scheduling, script help, editing workflows, and YouTube SEO tools for growing channels.",
+      "Done-for-you YouTube automation: research, scripting, editing, thumbnails, SEO, uploads, channel management, and monetization support.",
   },
   chatAgent: {
     title: "Chat Sales Agent",

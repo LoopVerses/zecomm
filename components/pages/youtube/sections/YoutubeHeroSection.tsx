@@ -4,10 +4,15 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, type Variants } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
-import { CountUp } from "@/components/shared/CountUp";
 import { YOUTUBE_SECTIONS } from "@/lib/youtube-tokens";
 import { YoutubeAmbientBackground } from "../shared/YoutubeAmbientBackground";
 import { YoutubeStudioVisual } from "../shared/YoutubeStudioVisual";
+
+const QUICK_STATS = [
+  { value: "10", label: "Services included" },
+  { value: "7", label: "Step process" },
+  { value: "100%", label: "Done for you" },
+] as const;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -61,16 +66,16 @@ export default function YoutubeHeroSection() {
         <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 font-poppins text-[10px] font-semibold uppercase tracking-[0.15em] text-white/70 backdrop-blur-sm transition-all hover:border-red-500/40 hover:text-white"
+            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 font-poppins text-[11px] font-semibold text-white/70 backdrop-blur-sm transition-all hover:border-red-500/40 hover:text-white"
             data-figma-node="8:997"
           >
             <span className="transition-transform group-hover:-translate-x-0.5">←</span>
-            Back to Hub
+            Back to Home
           </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
-          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="flex flex-col gap-7">
+          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="flex flex-col gap-6">
             <motion.div
               variants={itemVariants}
               className="flex w-fit items-center gap-2 rounded-full border border-red-600/30 bg-red-600/10 px-4 py-1.5"
@@ -81,64 +86,68 @@ export default function YoutubeHeroSection() {
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-600" />
               </span>
               <span
-                className="font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-red-500"
+                className="font-poppins text-[11px] font-semibold text-red-400"
                 data-figma-node="6:208"
               >
-                YouTube Automation
+                YouTube Automation Services
               </span>
             </motion.div>
 
             <motion.h1
               variants={itemVariants}
-              className="font-poppins text-[48px] font-light uppercase leading-[0.95] tracking-[-0.03em] text-white sm:text-[72px] lg:text-[88px]"
+              className="font-poppins text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.12] tracking-[-0.03em] text-white"
               data-figma-node="6:209"
             >
-              THE{" "}
-              <span className="bg-gradient-to-r from-red-500 via-red-600 to-rose-500 bg-clip-text font-extrabold text-transparent">
-                YT
+              Build and grow your YouTube channel{" "}
+              <span className="bg-gradient-to-r from-red-400 via-red-500 to-rose-500 bg-clip-text text-transparent">
+                without managing everything yourself
               </span>
-              <br />
-              <span className="font-extrabold">FACTORY.</span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="max-w-[500px] font-poppins text-sm leading-relaxed text-gray-400 sm:text-[15px]"
+              className="max-w-[540px] font-poppins text-base leading-relaxed text-gray-400"
               data-figma-node="6:210"
             >
-              Automate scripting, editing, voice, SEO, and uploads for your YouTube channel
-              around the clock.
+              Want to start or grow a YouTube channel but don&apos;t have time to handle research,
+              scripting, editing, thumbnails, uploads, SEO, and monetization? Our YouTube Automation
+              Service gives you a complete done-for-you solution.
+            </motion.p>
+
+            <motion.p
+              variants={itemVariants}
+              className="max-w-[540px] font-poppins text-sm leading-relaxed text-gray-500"
+            >
+              We manage the full process from content research to monetization, helping you build a
+              professional YouTube channel with consistent, high-quality content.
             </motion.p>
 
             <motion.div
               variants={itemVariants}
-              className="flex flex-col gap-5 sm:flex-row sm:items-center"
+              className="flex flex-col gap-4 sm:flex-row sm:items-center"
             >
               <Link
-                href="#pipeline"
-                className="inline-flex items-center justify-center rounded-xl bg-red-600 px-8 py-4 font-poppins text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_8px_32px_rgba(220,38,38,0.35)] transition-all hover:bg-red-500 hover:shadow-[0_12px_40px_rgba(220,38,38,0.45)]"
+                href="#contact"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-red-600 px-8 font-poppins text-sm font-semibold text-white shadow-[0_8px_32px_rgba(220,38,38,0.35)] transition-all hover:bg-red-500"
                 data-figma-node="6:211"
               >
-                Get started
+                Get Started Today
               </Link>
-              <div
-                className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] px-6 py-4 backdrop-blur-sm"
-                data-figma-node="6:214"
+              <Link
+                href="#contact"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 font-poppins text-sm font-semibold text-white transition-all hover:border-red-500/40 hover:bg-white/10"
               >
-                <CountUp
-                  value={12402}
-                  className="font-poppins text-3xl font-extrabold text-red-500"
-                  data-figma-node="6:215"
-                />
-                <span
-                  className="font-poppins text-[9px] font-bold uppercase leading-tight tracking-wider text-gray-500"
-                  data-figma-node="6:216"
-                >
-                  Videos
-                  <br />
-                  Generated / Mo
-                </span>
-              </div>
+                Book a Free Consultation
+              </Link>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-6 pt-1">
+              {QUICK_STATS.map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-poppins text-xl font-bold text-white">{stat.value}</p>
+                  <p className="font-poppins text-xs text-gray-500">{stat.label}</p>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
 

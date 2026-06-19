@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import { YOUTUBE_SECTIONS } from "@/lib/youtube-tokens";
 
 const PIPELINE_LOG = [
-  { icon: "fas fa-film", label: "RENDER", detail: "Unit_04 · 4K export", status: "active" },
-  { icon: "fas fa-search", label: "SEO", detail: "Best Tech 2026", status: "processing" },
-  { icon: "fas fa-cloud-upload-alt", label: "UPLOAD", detail: "Hub_Channel_12", status: "queued" },
-  { icon: "fas fa-chart-line", label: "RETENTION", detail: "92% avg score", status: "done" },
-  { icon: "fas fa-fire", label: "TREND", detail: "AI-Workspaces spike", status: "active" },
-  { icon: "fas fa-image", label: "THUMB", detail: "Variant B +34% CTR", status: "done" },
-  { icon: "fas fa-microphone", label: "VOICE", detail: "EN-US clone live", status: "processing" },
+  { icon: "fas fa-search", label: "RESEARCH", detail: "Trending topics", status: "active" as const },
+  { icon: "fas fa-pen", label: "SCRIPT", detail: "Retention-focused", status: "processing" as const },
+  { icon: "fas fa-microphone", label: "VOICE", detail: "Pro voiceover", status: "processing" as const },
+  { icon: "fas fa-film", label: "EDIT", detail: "Full production", status: "active" as const },
+  { icon: "fas fa-image", label: "THUMB", detail: "Click-focused design", status: "done" as const },
+  { icon: "fas fa-chart-line", label: "SEO", detail: "Title & tags", status: "done" as const },
+  { icon: "fas fa-cloud-upload-alt", label: "UPLOAD", detail: "Scheduled publish", status: "queued" as const },
+  { icon: "fas fa-dollar-sign", label: "MONETIZE", detail: "Growth tracking", status: "active" as const },
 ] as const;
 
 const STATUS_STYLES = {
@@ -46,7 +47,7 @@ export default function YoutubeTickerSection() {
       className="relative w-full overflow-hidden border-y border-red-600/20 bg-[#0d0d0d]"
       data-header-surface="dark"
       data-figma-node={YOUTUBE_SECTIONS.ticker}
-      aria-label="Live production pipeline"
+      aria-label="YouTube production pipeline"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-600/60 to-transparent" aria-hidden />
 
@@ -64,7 +65,7 @@ export default function YoutubeTickerSection() {
               className="font-poppins text-[10px] font-bold uppercase tracking-wider text-white"
               data-figma-node="6:183"
             >
-              Pipeline
+              Production
             </p>
           </div>
         </div>

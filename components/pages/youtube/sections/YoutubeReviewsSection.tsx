@@ -14,9 +14,9 @@ const REVIEWS = [
   {
     card: "6:236",
     quoteNode: "6:238",
-    metric: "140K/mo traffic",
+    metric: "Consistent uploads",
     quote:
-      "We scaled our Shopify traffic from 2k/mo to 140k/mo in 60 days using the YouTube Factory. The faceless content is better than what our human editors were making.",
+      "We finally have a channel that posts every week without me touching scripts or edits. The team handles research, production, and SEO professionally.",
     name: "Marcus J.",
     role: "Founder, Apex Gear",
     initials: "MJ",
@@ -24,9 +24,9 @@ const REVIEWS = [
   {
     card: "6:243",
     quoteNode: "6:245",
-    metric: "Top 3 in 12hrs",
+    metric: "Better SEO results",
     quote:
-      "The SEO Forge is terrifyingly accurate. Every video we generate lands in the top 3 results for our target keywords within 12 hours. Pure ROI machine.",
+      "Titles, thumbnails, and descriptions are optimized properly. Our videos reach the right audience and the channel looks fully managed.",
     name: "Sarah L.",
     role: "Growth Lead, Z-Tech",
     initials: "SL",
@@ -34,9 +34,9 @@ const REVIEWS = [
   {
     card: "6:250",
     quoteNode: "6:252",
-    metric: "24/7 authority",
+    metric: "True done-for-you",
     quote:
-      "Finally, an automation that doesn't feel robotic. The scripts are high-retention and actually build brand authority while we sleep.",
+      "I wanted YouTube growth without recording or editing myself. This service delivered a complete content system with consistent publishing.",
     name: "Ben Rahim",
     role: "CEO, Axora Digitals",
     initials: "BR",
@@ -65,17 +65,14 @@ export default function YoutubeReviewsSection() {
 
       <SiteContainer>
         <YoutubeSectionReveal className="text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-600/25 bg-red-600/10 px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-red-500">
-            Creator reports
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-600/25 bg-red-600/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-red-400">
+            Client feedback
           </span>
           <h2
-            className="font-poppins text-[36px] font-light uppercase leading-[1.1] tracking-[-0.03em] text-white sm:text-[52px]"
+            className="font-poppins text-[clamp(1.75rem,4vw,2.25rem)] font-bold leading-tight text-white"
             data-figma-node="6:235"
           >
-            FACTORY{" "}
-            <span className="bg-gradient-to-r from-red-500 to-rose-500 bg-clip-text font-extrabold text-transparent">
-              VERDICTS.
-            </span>
+            Trusted by channel owners
           </h2>
         </YoutubeSectionReveal>
 
