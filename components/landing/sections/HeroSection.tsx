@@ -50,7 +50,7 @@ export default function HeroSection() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/15 bg-brand-blue/5 px-3 py-1 font-poppins text-[11px] font-semibold text-brand-blue">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
-              Zeecomm AI Platform
+              Zero Effortless Ecommerce Automations
             </span>
 
             <h1 className="mt-5 font-poppins text-[clamp(2.25rem,5.5vw,3.5rem)] font-bold leading-[1.1] tracking-[-0.03em] text-gray-900">
@@ -59,8 +59,9 @@ export default function HeroSection() {
             </h1>
 
             <p className="mt-5 font-poppins text-base leading-relaxed text-gray-600 sm:text-lg">
-              One hub for sales, support, content, and email. Pick the tools you need. Each runs
-              on autopilot so your team can focus on growth.
+              Launch, manage, and scale your online business without handling the daily operations
+              yourself. From e-commerce store management to AI-powered systems and YouTube automation,
+              we build the backend so your business can grow on autopilot.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
