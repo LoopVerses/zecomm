@@ -9,9 +9,9 @@ export const PAGE_METADATA = {
       "AI tools for e-commerce, WhatsApp, email, YouTube, and more. Automate sales, support, and content from one place.",
   },
   ecom: {
-    title: "E-Commerce Automation",
-  description:
-    "Launch and scale stores on Amazon, Shopify, Etsy, Walmart, eBay, and TikTok Shop. Sync inventory, orders, and fulfillment from one place.",
+    title: "Zero Effort E-Commerce",
+    description:
+      "Complete A-Z e-commerce automation and marketplace management on Walmart, TikTok Shop, Etsy, eBay, Shopify, and Amazon.",
   },
   whatsapp: {
     title: "WhatsApp Agent",

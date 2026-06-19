@@ -2,10 +2,11 @@ import { PageShell } from "@/components/layout/SiteContainer";
 import {
   EcomFinalCtaSection,
   EcomHeroSection,
-  EcomLiveSyncSection,
+  EcomModelsSection,
   EcomPlatformsSection,
+  EcomProcessSection,
   EcomReviewsSection,
-  EcomTelemetrySection,
+  EcomServicesSection,
   EcomWhySection,
   ECOM_FRAME_NODE,
   ECOM_PAGE_NODE,
@@ -20,10 +21,11 @@ export default function EcomPage() {
     <PageShell className="bg-transparent" data-figma-node={ECOM_PAGE_NODE}>
       <div data-figma-node={ECOM_FRAME_NODE}>
         <EcomHeroSection />
-        <EcomPlatformsSection />
         <EcomWhySection />
-        <EcomLiveSyncSection />
-        <EcomTelemetrySection />
+        <EcomServicesSection />
+        <EcomPlatformsSection />
+        <EcomProcessSection />
+        <EcomModelsSection />
         <EcomReviewsSection />
         <EcomFinalCtaSection />
       </div>

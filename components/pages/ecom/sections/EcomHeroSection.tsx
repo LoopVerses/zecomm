@@ -10,12 +10,12 @@ import { HeroAmbientBackground } from "../shared/AmbientBackground";
 import { EcomStorefrontVisual } from "../shared/EcomStorefrontVisual";
 import { StoreBrandChip, StoreBrandId } from "../shared/StoreBrandLogos";
 
-const PLATFORMS: StoreBrandId[] = ["amazon", "shopify", "etsy", "walmart", "ebay", "tiktok"];
+const PLATFORMS: StoreBrandId[] = ["walmart", "tiktok", "etsy", "ebay", "shopify", "amazon"];
 
 const QUICK_STATS = [
   { value: "6", label: "Marketplaces" },
-  { value: "0.2s", label: "Sync speed" },
-  { value: "24/7", label: "Automation" },
+  { value: "A-Z", label: "Management" },
+  { value: "Zero", label: "Effort for you" },
 ] as const;
 
 const containerVariants = {
@@ -96,25 +96,27 @@ export default function EcomHeroSection() {
               data-figma-node="6:492"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
-              E-Commerce Automation
+              Zero Effort E-Commerce Solutions
             </motion.span>
 
             <motion.h1
               variants={itemVariants}
-              className="font-poppins text-[clamp(2.25rem,5.5vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.03em] text-gray-900"
+              className="font-poppins text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.12] tracking-[-0.03em] text-gray-900"
               data-figma-node="6:495"
             >
-              Launch, manage, and scale stores across{" "}
-              <span className="text-brand-blue">every major marketplace</span>
+              Build, Manage &amp; Scale Your E-Commerce Business{" "}
+              <span className="text-brand-blue">With Zero Effort</span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="max-w-lg font-poppins text-base leading-relaxed text-gray-600 sm:text-lg"
+              className="max-w-lg font-poppins text-base leading-relaxed text-gray-600 sm:text-[15px]"
               data-figma-node="6:496"
             >
-              We sync inventory, orders, and fulfillment on Amazon, Shopify, Etsy, Walmart, eBay, and
-              TikTok Shop so you can focus on growth, not tech.
+              At Zeecom, we provide complete A-Z e-commerce automation and marketplace management
+              services. From store setup to product research, supplier communication, order fulfillment,
+              payout handling, and daily operations, our team manages everything so you can focus on
+              growth while we handle the work.
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-wrap gap-2.5">
@@ -128,17 +130,17 @@ export default function EcomHeroSection() {
               className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center"
             >
               <Link
-                href="#platforms"
+                href="#consultation"
                 className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-blue px-8 font-poppins text-sm font-semibold text-white transition-colors hover:bg-brand-blue/90"
                 data-figma-node="6:497"
               >
-                Get started
+                Get Started Today
               </Link>
               <Link
-                href="#sync"
+                href="#consultation"
                 className="inline-flex h-12 items-center justify-center rounded-xl border border-gray-200 bg-white px-8 font-poppins text-sm font-semibold text-gray-700 transition-colors hover:border-brand-blue/30 hover:text-brand-blue"
               >
-                See how it works
+                Book a Free Consultation
               </Link>
             </motion.div>
 
