@@ -159,7 +159,7 @@ function Logo({ surface, compact = false }: { surface: HeaderSurface; compact?: 
             }`}
             data-figma-node="7:971"
           >
-            CORE SYSTEMS
+            SOLUTIONS
           </span>
         </div>
       )}

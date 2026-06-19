@@ -50,7 +50,7 @@ export default function HeroSection() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/15 bg-brand-blue/5 px-3 py-1 font-poppins text-[11px] font-semibold text-brand-blue">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
-              Zero Effortless Ecommerce Automations
+              Zero Effort Ecommerce Automations Solutions
             </span>
 
             <h1 className="mt-5 font-poppins text-[clamp(2.25rem,5.5vw,3.5rem)] font-bold leading-[1.1] tracking-[-0.03em] text-gray-900">
