@@ -20,12 +20,12 @@ export default function YoutubeAboutSection() {
           <h2 className="font-poppins text-[clamp(1.75rem,4vw,2.25rem)] font-bold leading-tight text-white">
             Complete done-for-you YouTube automation
           </h2>
-          <p className="mt-4 font-poppins text-base leading-relaxed text-gray-400">
+          <p className="mt-4 font-poppins text-base leading-relaxed text-gray-300">
             Our YouTube automation service is designed for business owners, creators, entrepreneurs,
             and brands who want to grow on YouTube without handling the daily content production
             process.
           </p>
-          <p className="mt-4 font-poppins text-base leading-relaxed text-gray-500">
+          <p className="mt-4 font-poppins text-base leading-relaxed text-gray-400">
             From planning to publishing, our team takes care of every step needed to keep your channel
             active, optimized, and ready for growth.
           </p>

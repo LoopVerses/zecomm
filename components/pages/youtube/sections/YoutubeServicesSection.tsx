@@ -1,20 +1,12 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
 import { YOUTUBE_SECTIONS } from "@/lib/youtube-tokens";
 import { YOUTUBE_SERVICES } from "@/lib/youtube-content";
-import {
-  staggerContainer,
-  staggerItem,
-  YoutubeSectionReveal,
-} from "../shared/YoutubeSectionReveal";
+import { YoutubeSectionReveal } from "../shared/YoutubeSectionReveal";
 
 export default function YoutubeServicesSection() {
-  const gridRef = useRef<HTMLDivElement>(null);
-  const gridInView = useInView(gridRef, { once: true, margin: "-60px" });
-
   return (
     <section
       id="services"
@@ -32,7 +24,7 @@ export default function YoutubeServicesSection() {
         aria-hidden
       />
 
-      <SiteContainer>
+      <SiteContainer className="relative">
         <YoutubeSectionReveal className="mx-auto max-w-2xl text-center">
           <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-1.5 font-poppins text-[11px] font-semibold text-red-600">
             What&apos;s included
@@ -46,17 +38,14 @@ export default function YoutubeServicesSection() {
           </p>
         </YoutubeSectionReveal>
 
-        <motion.div
-          ref={gridRef}
-          className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
-          variants={staggerContainer}
-          initial="hidden"
-          animate={gridInView ? "visible" : "hidden"}
-        >
-          {YOUTUBE_SERVICES.map((service) => (
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {YOUTUBE_SERVICES.map((service, index) => (
             <motion.article
               key={service.title}
-              variants={staggerItem}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.45, delay: index * 0.03 }}
               className="group rounded-2xl border border-gray-200 bg-gray-50/80 p-5 transition-all hover:border-red-200 hover:bg-white hover:shadow-[0_8px_28px_rgba(220,38,38,0.08)]"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
@@ -66,7 +55,7 @@ export default function YoutubeServicesSection() {
               <p className="mt-2 font-poppins text-xs leading-relaxed text-gray-500">{service.description}</p>
             </motion.article>
           ))}
-        </motion.div>
+        </div>
       </SiteContainer>
     </section>
   );

@@ -8,18 +8,18 @@ import { LANDING_BG } from "@/lib/landing-theme";
 export const HERO_FIGMA_NODE = "6:83";
 
 const QUICK_STATS = [
-  { value: "8", label: "AI tools" },
+  { value: "8+", label: "Automation tools" },
   { value: "99.9%", label: "Uptime" },
   { value: "24/7", label: "Automation" },
 ] as const;
 
 const PREVIEW_SERVICES = [
   { name: "E-Commerce", href: "/ecom", color: "bg-blue-50 text-blue-700 border-blue-100" },
-  { name: "WhatsApp", href: "/whatsapp", color: "bg-emerald-50 text-emerald-700 border-emerald-100" },
   { name: "YouTube", href: "/youtube", color: "bg-rose-50 text-rose-700 border-rose-100" },
-  { name: "Chat Agent", href: "/chat-agent", color: "bg-indigo-50 text-indigo-700 border-indigo-100" },
-  { name: "Email", href: "/email", color: "bg-violet-50 text-violet-700 border-violet-100" },
-  { name: "Voice", href: "/voice-clone", color: "bg-amber-50 text-amber-700 border-amber-100" },
+  { name: "WhatsApp", href: "/services", color: "bg-emerald-50 text-emerald-700 border-emerald-100" },
+  { name: "Chat Agent", href: "/services", color: "bg-indigo-50 text-indigo-700 border-indigo-100" },
+  { name: "Email", href: "/services", color: "bg-violet-50 text-violet-700 border-violet-100" },
+  { name: "All Services", href: "/services", color: "bg-gray-50 text-gray-700 border-gray-200" },
 ] as const;
 
 export default function HeroSection() {
@@ -130,10 +130,10 @@ export default function HeroSection() {
               </div>
 
               <Link
-                href="#services"
+                href="/services"
                 className="mt-4 flex items-center justify-center gap-1 font-poppins text-xs font-semibold text-brand-blue hover:underline"
               >
-                View all 8 services
+                View all services
                 <span aria-hidden>→</span>
               </Link>
             </div>

@@ -48,6 +48,11 @@ export const PAGE_METADATA = {
     description:
       "Sort inbox by intent, rank priority, and auto-draft replies so you respond faster.",
   },
+  services: {
+    title: "All Services",
+    description:
+      "Explore Zeecom automation services: e-commerce, YouTube, WhatsApp, chat, email, voice, market intel, and more.",
+  },
 } as const;
 
 export type PageMetadataKey = keyof typeof PAGE_METADATA;

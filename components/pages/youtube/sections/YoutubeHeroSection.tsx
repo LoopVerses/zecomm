@@ -46,7 +46,7 @@ export default function YoutubeHeroSection() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[100dvh] w-full overflow-hidden bg-[#0A0A0A] pt-24 pb-16 sm:pt-28 sm:pb-20"
+      className="relative min-h-[100dvh] w-full overflow-x-hidden bg-[#0A0A0A] pt-24 pb-16 sm:pt-28 sm:pb-20"
       data-header-surface="dark"
       data-figma-node={YOUTUBE_SECTIONS.hero}
     >
@@ -127,14 +127,14 @@ export default function YoutubeHeroSection() {
               className="flex flex-col gap-4 sm:flex-row sm:items-center"
             >
               <Link
-                href="#contact"
+                href="/services#contact"
                 className="inline-flex h-12 items-center justify-center rounded-xl bg-red-600 px-8 font-poppins text-sm font-semibold text-white shadow-[0_8px_32px_rgba(220,38,38,0.35)] transition-all hover:bg-red-500"
                 data-figma-node="6:211"
               >
                 Get Started Today
               </Link>
               <Link
-                href="#contact"
+                href="/services#contact"
                 className="inline-flex h-12 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 font-poppins text-sm font-semibold text-white transition-all hover:border-red-500/40 hover:bg-white/10"
               >
                 Book a Free Consultation

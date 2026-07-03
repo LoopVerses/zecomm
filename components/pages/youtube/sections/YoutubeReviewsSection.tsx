@@ -1,14 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
 import { YOUTUBE_SECTIONS } from "@/lib/youtube-tokens";
-import {
-  staggerContainer,
-  staggerItem,
-  YoutubeSectionReveal,
-} from "../shared/YoutubeSectionReveal";
+import { YoutubeSectionReveal } from "../shared/YoutubeSectionReveal";
 
 const REVIEWS = [
   {
@@ -44,12 +39,9 @@ const REVIEWS = [
 ] as const;
 
 export default function YoutubeReviewsSection() {
-  const gridRef = useRef<HTMLDivElement>(null);
-  const gridInView = useInView(gridRef, { once: true, margin: "-60px" });
-
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#0A0A0A] py-24 lg:py-32"
+      className="relative w-full overflow-x-hidden bg-[#0A0A0A] py-16 sm:py-20 lg:py-24"
       data-header-surface="dark"
       data-figma-node={YOUTUBE_SECTIONS.reviews}
     >
@@ -76,28 +68,17 @@ export default function YoutubeReviewsSection() {
           </h2>
         </YoutubeSectionReveal>
 
-        <motion.div
-          ref={gridRef}
-          className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
-          variants={staggerContainer}
-          initial="hidden"
-          animate={gridInView ? "visible" : "hidden"}
-        >
-          {REVIEWS.map((review) => (
+        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {REVIEWS.map((review, index) => (
             <motion.article
               key={review.card}
-              variants={staggerItem}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-colors duration-300 hover:border-red-600/30 hover:bg-white/[0.05]"
-              whileHover={{ y: -4 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-colors duration-300 hover:border-red-600/30 hover:bg-white/[0.05] sm:p-8"
               data-figma-node={review.card}
             >
-              <motion.span
-                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-red-600/[0.06] to-transparent opacity-0"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%", opacity: 1 }}
-                transition={{ duration: 0.55 }}
-                aria-hidden
-              />
               <div className="relative">
                 <div className="flex items-center justify-between">
                   <i className="fab fa-youtube text-2xl text-red-600/40" aria-hidden />
@@ -106,7 +87,7 @@ export default function YoutubeReviewsSection() {
                   </span>
                 </div>
                 <p
-                  className="mt-6 font-poppins text-sm leading-relaxed text-gray-400"
+                  className="mt-6 font-poppins text-sm leading-relaxed text-gray-300"
                   data-figma-node={review.quoteNode}
                 >
                   <span className="text-red-600/50">&ldquo;</span>
@@ -125,7 +106,7 @@ export default function YoutubeReviewsSection() {
               </div>
             </motion.article>
           ))}
-        </motion.div>
+        </div>
       </SiteContainer>
     </section>
   );

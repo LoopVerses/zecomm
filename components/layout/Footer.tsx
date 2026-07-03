@@ -2,23 +2,9 @@
 
 import Link from "next/link";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { FOOTER_COMPANY_LINKS, FOOTER_SERVICE_LINKS } from "@/lib/nav-links";
 
 const FIGMA_NODE_ID = "6:112";
-
-const MODULE_LINKS = [
-  { label: "E-Commerce", href: "/ecom" },
-  { label: "WhatsApp", href: "/whatsapp" },
-  { label: "YouTube", href: "/youtube" },
-  { label: "Market Intel", href: "/market-intel" },
-  { label: "Chat Agent", href: "/chat-agent" },
-  { label: "Email", href: "/email" },
-] as const;
-
-const LEGAL_LINKS = [
-  { label: "How it works", href: "/#how-it-works" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Privacy", href: "/" },
-] as const;
 
 export default function Footer() {
   return (
@@ -30,12 +16,13 @@ export default function Footer() {
       <SiteContainer>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-5">
-            <p className="font-poppins text-lg font-bold text-gray-900">Zeecomm</p>
+            <p className="font-poppins text-lg font-bold text-gray-900">Zeecom Automations</p>
             <p className="mt-2 max-w-sm font-poppins text-sm leading-relaxed text-gray-500">
-              AI automation for sales, support, content, and email. Simple tools that work together.
+              Zero effort e-commerce automations and AI-powered systems. We build the backend so your
+              business can grow on autopilot.
             </p>
             <Link
-              href="#services"
+              href="/services"
               className="mt-5 inline-flex h-10 items-center rounded-lg bg-brand-blue px-5 font-poppins text-sm font-semibold text-white transition-colors hover:bg-brand-blue/90"
             >
               View all services
@@ -46,8 +33,8 @@ export default function Footer() {
             <p className="font-poppins text-xs font-semibold uppercase tracking-wider text-gray-400">
               Services
             </p>
-            <ul className="mt-4 grid grid-cols-2 gap-2">
-              {MODULE_LINKS.map((item) => (
+            <ul className="mt-4 flex flex-col gap-2">
+              {FOOTER_SERVICE_LINKS.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
@@ -65,7 +52,7 @@ export default function Footer() {
               Company
             </p>
             <ul className="mt-4 flex flex-col gap-2">
-              {LEGAL_LINKS.map((item) => (
+              {FOOTER_COMPANY_LINKS.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
@@ -80,7 +67,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-8 sm:flex-row">
-          <p className="font-poppins text-xs text-gray-400">© 2026 Zeecomm. All rights reserved.</p>
+          <p className="font-poppins text-xs text-gray-400">© 2026 Zeecom Automations. All rights reserved.</p>
           <div className="flex gap-4">
             {["LinkedIn", "Twitter", "GitHub"].map((label) => (
               <a

@@ -54,18 +54,18 @@ export default function YoutubeCtaSection() {
 
               <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                 <Link
-                  href="#contact"
+                  href="/services#contact"
                   className="inline-flex h-12 w-full min-w-[220px] items-center justify-center rounded-xl bg-red-600 px-8 font-poppins text-sm font-semibold text-white shadow-[0_8px_32px_rgba(220,38,38,0.35)] transition-all hover:bg-red-500 sm:w-auto"
                   data-figma-node="6:268"
                 >
                   Contact Us Today
                 </Link>
                 <Link
-                  href="/whatsapp"
+                  href="mailto:hello@zeecom.com"
                   className="inline-flex h-12 w-full min-w-[220px] items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 font-poppins text-sm font-semibold text-white transition-all hover:border-red-500/40 hover:bg-white/10 sm:w-auto"
                   data-figma-node="6:271"
                 >
-                  Chat on WhatsApp
+                  Email Us
                 </Link>
               </div>
             </div>

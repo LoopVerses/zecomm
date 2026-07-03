@@ -9,7 +9,7 @@ import { YoutubeSectionReveal } from "../shared/YoutubeSectionReveal";
 export default function YoutubeWhySection() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#0A0A0A] py-16 sm:py-20 lg:py-24"
+      className="relative w-full overflow-x-hidden bg-[#0A0A0A] py-16 sm:py-20 lg:py-24"
       data-header-surface="dark"
       data-figma-node={YOUTUBE_SECTIONS.why}
     >
