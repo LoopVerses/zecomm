@@ -11,7 +11,7 @@ export const metadata = createPageMetadata("services");
 
 export default function ServicesPage() {
   return (
-    <PageShell>
+    <PageShell className="bg-surface-base">
       <ServicesHeroSection />
       <ServicesGridSection />
       <ServicesPlatformsSection />

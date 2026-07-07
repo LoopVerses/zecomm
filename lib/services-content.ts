@@ -1,4 +1,7 @@
 import type { StoreBrandId } from "@/components/pages/ecom/shared/StoreBrandLogos";
+import { HEAD_OFFICE, HEAD_OFFICE_MAPS_URL } from "@/lib/company-info";
+
+export type ServiceGlow = "violet" | "cyan" | "lime" | "red";
 
 export type ServiceOffering = {
   title: string;
@@ -7,6 +10,8 @@ export type ServiceOffering = {
   icon: string;
   iconBg: string;
   iconColor: string;
+  href: string;
+  glow: ServiceGlow;
 };
 
 export const FEATURED_SERVICES = [
@@ -15,6 +20,7 @@ export const FEATURED_SERVICES = [
     description: "Full marketplace management on Amazon, Shopify, Walmart, Etsy, eBay, and TikTok Shop.",
     href: "/ecom",
     badge: "Most popular",
+    glow: "violet" as const,
     accent: "border-brand-blue/20 bg-brand-blue/5 text-brand-blue",
   },
   {
@@ -22,6 +28,7 @@ export const FEATURED_SERVICES = [
     description: "Done-for-you channel growth from research and scripting to editing, SEO, and monetization.",
     href: "/youtube",
     badge: "Content",
+    glow: "red" as const,
     accent: "border-red-200 bg-red-50 text-red-600",
   },
 ] as const;
@@ -32,48 +39,60 @@ export const ADDITIONAL_SERVICES: ServiceOffering[] = [
     description: "Instant replies, cart recovery, and customer support on WhatsApp with high open rates.",
     badge: "98% open rate",
     icon: "fab fa-whatsapp",
-    iconBg: "bg-emerald-50",
-    iconColor: "text-emerald-600",
+    iconBg: "bg-emerald-500/10 border border-emerald-500/20",
+    iconColor: "text-emerald-400",
+    href: "/whatsapp",
+    glow: "lime",
   },
   {
     title: "Chat Sales Agent",
     description: "On-site AI chat that handles sales questions, objections, and helps visitors buy.",
     badge: "Sales",
     icon: "fas fa-comments",
-    iconBg: "bg-indigo-50",
-    iconColor: "text-indigo-600",
+    iconBg: "bg-accent-violet/10 border border-accent-violet/20",
+    iconColor: "text-accent-violet",
+    href: "/chat-agent",
+    glow: "violet",
   },
   {
     title: "Clone Agent",
     description: "Replicate your best rep's style, memory, and workflow into a consistent AI agent.",
     badge: "99.8% match",
     icon: "fas fa-user-circle",
-    iconBg: "bg-violet-50",
-    iconColor: "text-violet-600",
+    iconBg: "bg-accent-violet/10 border border-accent-violet/20",
+    iconColor: "text-accent-violet",
+    href: "/clone-agent",
+    glow: "cyan",
   },
   {
     title: "Market Intel",
     description: "Track competitors, search trends, keyword gaps, and market opportunities in real time.",
     badge: "Research",
     icon: "fas fa-globe",
-    iconBg: "bg-sky-50",
-    iconColor: "text-sky-600",
+    iconBg: "bg-accent-cyan/10 border border-accent-cyan/20",
+    iconColor: "text-accent-cyan",
+    href: "/market-intel",
+    glow: "cyan",
   },
   {
     title: "Voice Clone",
     description: "Realistic multi-language AI voice for sales calls, support, and video content.",
     badge: "Audio",
     icon: "fas fa-microphone",
-    iconBg: "bg-amber-50",
-    iconColor: "text-amber-600",
+    iconBg: "bg-amber-500/10 border border-amber-500/20",
+    iconColor: "text-amber-400",
+    href: "/voice-clone",
+    glow: "red",
   },
   {
     title: "Email Scanner",
     description: "Sort inbox by intent, rank priority, and auto-draft replies so you respond faster.",
     badge: "Inbox",
     icon: "fas fa-envelope",
-    iconBg: "bg-gray-100",
-    iconColor: "text-gray-600",
+    iconBg: "bg-white/5 border border-white/10",
+    iconColor: "text-ink-secondary",
+    href: "/email",
+    glow: "violet",
   },
 ];
 
@@ -122,17 +141,27 @@ export const CONTACT_OPTIONS = [
     title: "Email us",
     detail: "hello@zeecom.com",
     href: "mailto:hello@zeecom.com",
+    glow: "violet" as const,
   },
   {
     icon: "fab fa-whatsapp",
     title: "WhatsApp",
     detail: "Chat with our team",
     href: "https://wa.me/",
+    glow: "lime" as const,
+  },
+  {
+    icon: "fas fa-map-marker-alt",
+    title: HEAD_OFFICE.label,
+    detail: `${HEAD_OFFICE.street}, ${HEAD_OFFICE.city}, ${HEAD_OFFICE.province} ${HEAD_OFFICE.postalCode}`,
+    href: HEAD_OFFICE_MAPS_URL,
+    glow: "cyan" as const,
   },
   {
     icon: "fas fa-calendar-check",
     title: "Book a call",
     detail: "Free consultation",
     href: "/services#contact",
+    glow: "violet" as const,
   },
 ] as const;

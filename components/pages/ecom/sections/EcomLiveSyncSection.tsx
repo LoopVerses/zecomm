@@ -82,7 +82,7 @@ export default function EcomLiveSyncSection() {
   return (
     <section
       id="sync"
-      className="relative w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-24"
+      className="relative w-full overflow-x-clip overflow-hidden bg-white py-14 sm:py-16 md:py-20 lg:py-24"
       data-header-surface="light"
       data-figma-node={ECOM_SECTIONS.liveSync}
     >

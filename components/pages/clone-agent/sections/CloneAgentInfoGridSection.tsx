@@ -3,8 +3,11 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
 import { CLONE_AGENT_SECTIONS } from "@/lib/clone-agent-tokens";
 import { CloneAgentSectionReveal, staggerContainer, staggerItem } from "../shared/CloneAgentSectionReveal";
+
+const GLOWS = ["violet", "cyan", "lime", "red"] as const;
 
 const FEATURES = [
   {
@@ -36,18 +39,20 @@ export default function CloneAgentInfoGridSection() {
 
   return (
     <section
-      className="w-full border-t border-gray-200 bg-[#F3F6FF] py-24 lg:py-32"
-      data-header-surface="light"
+      className="relative w-full overflow-x-clip border-t border-white/10 bg-surface-raised py-14 sm:py-16 md:py-20 lg:py-24"
+      data-header-surface="dark"
       data-figma-node={CLONE_AGENT_SECTIONS.infoGrid}
     >
-      <SiteContainer>
+      <SectionAmbience variant="mixed" />
+
+      <SiteContainer className="relative z-10">
         <CloneAgentSectionReveal className="mb-14 text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-brand-blue">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-violet/25 bg-accent-violet/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-accent-violet">
             Clone capabilities
           </span>
-          <h2 className="font-poppins text-[36px] font-light uppercase tracking-[-0.03em] text-gray-900 sm:text-[48px]">
+          <h2 className="font-display text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight text-ink-primary">
             BUILT TO{" "}
-            <span className="bg-gradient-to-r from-brand-blue to-violet-500 bg-clip-text font-extrabold text-transparent">
+            <span className="bg-gradient-to-r from-accent-violet to-violet-400 bg-clip-text text-transparent">
               MIRROR YOU.
             </span>
           </h2>
@@ -60,36 +65,31 @@ export default function CloneAgentInfoGridSection() {
           initial="hidden"
           animate={gridInView ? "visible" : "hidden"}
         >
-          {FEATURES.map((feature) => (
-            <motion.article
-              key={feature.node}
-              variants={staggerItem}
-              className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-8 transition-all hover:border-brand-blue/25"
-              whileHover={{ y: -4 }}
-              data-figma-node={feature.node}
-            >
-              <motion.span
-                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-brand-blue/[0.05] to-transparent opacity-0"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%", opacity: 1 }}
-                transition={{ duration: 0.55 }}
-                aria-hidden
-              />
-              <div className="relative">
-                <div className="flex items-center justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10">
-                    <i className={`${feature.icon} text-lg text-brand-blue`} aria-hidden />
-                  </span>
-                  <span className="rounded-full border border-brand-blue/20 bg-brand-blue/5 px-2.5 py-1 font-poppins text-[8px] font-bold uppercase text-brand-blue">
-                    {feature.metric}
-                  </span>
+          {FEATURES.map((feature, i) => (
+            <motion.div key={feature.node} variants={staggerItem} className="h-full" data-figma-node={feature.node}>
+              <EliteCard glow={GLOWS[i % GLOWS.length]} className="h-full">
+                <div className="group relative p-8">
+                  <div className="relative">
+                    <div className="flex items-center justify-between">
+                      <motion.span
+                        className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-violet/15"
+                        whileHover={{ rotate: [0, -8, 8, 0], scale: 1.08 }}
+                        transition={{ duration: 0.45 }}
+                      >
+                        <i className={`${feature.icon} text-lg text-accent-violet`} aria-hidden />
+                      </motion.span>
+                      <span className="rounded-full border border-accent-violet/25 bg-accent-violet/10 px-2.5 py-1 font-poppins text-[8px] font-bold uppercase text-accent-violet">
+                        {feature.metric}
+                      </span>
+                    </div>
+                    <h3 className="mt-6 font-poppins text-lg font-bold uppercase tracking-tight text-ink-primary">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-3 font-poppins text-sm leading-relaxed text-ink-secondary">{feature.body}</p>
+                  </div>
                 </div>
-                <h3 className="mt-6 font-poppins text-lg font-bold uppercase tracking-tight text-gray-900">
-                  {feature.title}
-                </h3>
-                <p className="mt-3 font-poppins text-sm leading-relaxed text-gray-600">{feature.body}</p>
-              </div>
-            </motion.article>
+              </EliteCard>
+            </motion.div>
           ))}
         </motion.div>
       </SiteContainer>

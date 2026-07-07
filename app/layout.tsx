@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${fontVariables} ${poppins.className} overflow-x-hidden antialiased`}>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${fontVariables} ${poppins.className} overflow-x-hidden bg-surface-base antialiased`}>
         <Header />
         <main className="overflow-x-hidden">
           <PageTransition>{children}</PageTransition>

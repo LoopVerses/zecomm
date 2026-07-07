@@ -4,9 +4,12 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
 import { WHATSAPP_SECTIONS } from "@/lib/whatsapp-tokens";
 import { WhatsappPhoneMockup } from "../shared/WhatsappPhoneMockup";
 import { WhatsappSectionReveal } from "../shared/WhatsappSectionReveal";
+
+const GLOWS = ["violet", "cyan", "lime", "red"] as const;
 
 const WA_CAPABILITIES = [
   { icon: "fab fa-whatsapp", label: "Business API", desc: "Official Meta Cloud API" },
@@ -45,21 +48,26 @@ function RecoveryFlowCard({
   return (
     <motion.div
       ref={ref}
-      className="group flex gap-4 rounded-r-2xl border-l-4 border-green-500 bg-white py-4 pl-5 pr-4 transition-colors duration-300 hover:bg-green-50/40"
       initial={{ opacity: 0, x: -24 }}
       animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }}
       transition={{ delay: index * 0.1, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ x: 6 }}
     >
-      <span className="font-poppins text-2xl font-black text-green-500/30 transition-colors group-hover:text-green-500/50">
-        {step.step}
-      </span>
-      <div>
-        <p className="font-poppins text-xs font-bold uppercase tracking-wide text-gray-900 group-hover:text-green-700">
-          {step.label}
-        </p>
-        <p className="mt-1 font-poppins text-[11px] leading-relaxed text-gray-500">{step.detail}</p>
-      </div>
+      <EliteCard
+        glow={GLOWS[index % GLOWS.length]}
+        className="rounded-r-2xl border-l-4 border-emerald-500 hover:border-emerald-400/60"
+      >
+        <div className="group flex gap-4 py-4 pl-5 pr-4">
+          <span className="font-poppins text-2xl font-black text-emerald-500/30 transition-colors group-hover:text-emerald-500/50">
+            {step.step}
+          </span>
+          <div>
+            <p className="font-poppins text-xs font-bold uppercase tracking-wide text-ink-primary group-hover:text-emerald-400">
+              {step.label}
+            </p>
+            <p className="mt-1 font-poppins text-[11px] leading-relaxed text-ink-muted">{step.detail}</p>
+          </div>
+        </div>
+      </EliteCard>
     </motion.div>
   );
 }
@@ -71,10 +79,12 @@ export default function WhatsappRecoverySection() {
   return (
     <section
       id="recovery"
-      className="relative w-full overflow-hidden border-t border-green-100 bg-white py-20 lg:py-28"
-      data-header-surface="light"
+      className="relative w-full overflow-x-clip overflow-hidden border-t border-white/10 bg-surface-base py-14 sm:py-16 md:py-20 lg:py-24"
+      data-header-surface="dark"
       data-figma-node={WHATSAPP_SECTIONS.recovery}
     >
+      <SectionAmbience variant="mixed" />
+
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
@@ -85,24 +95,29 @@ export default function WhatsappRecoverySection() {
         aria-hidden
       />
 
-      <SiteContainer>
+      <SiteContainer className="relative z-10">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 xl:gap-16">
           <WhatsappSectionReveal>
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/5 px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-green-600">
-              <i className="fab fa-whatsapp text-[10px]" aria-hidden />
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-emerald-400">
+              <motion.i
+                className="fab fa-whatsapp text-[10px]"
+                whileHover={{ rotate: [0, -8, 8, 0], scale: 1.15 }}
+                transition={{ duration: 0.45 }}
+                aria-hidden
+              />
               Abandoned cart protocol
             </span>
 
             <h2
-              className="font-poppins text-[32px] font-light uppercase leading-[1.1] tracking-[-0.03em] text-gray-900 sm:text-[44px] lg:text-[48px]"
+              className="font-display text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.1] tracking-tight text-ink-primary"
               data-figma-node="6:824"
             >
               THE ABANDONED
               <br />
-              <span className="relative inline-block bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text font-extrabold text-transparent">
+              <span className="relative inline-block bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
                 RECOVERY ENGINE.
                 <motion.span
-                  className="absolute -bottom-1 left-0 h-0.5 w-full origin-left bg-gradient-to-r from-green-500/80 to-transparent"
+                  className="absolute -bottom-1 left-0 h-0.5 w-full origin-left bg-gradient-to-r from-emerald-500/80 to-transparent"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
                   viewport={{ once: true }}
@@ -112,11 +127,11 @@ export default function WhatsappRecoverySection() {
             </h2>
 
             <p
-              className="mt-5 font-poppins text-sm leading-relaxed text-gray-600 sm:text-[15px]"
+              className="mt-5 font-poppins text-sm leading-relaxed text-ink-secondary sm:text-[15px]"
               data-figma-node="6:825"
             >
               Unlike email at ~20% open rates, WA-Z lands in your customer&apos;s pocket at{" "}
-              <span className="font-semibold text-green-600">98%</span>. Real WhatsApp Business
+              <span className="font-semibold text-emerald-400">98%</span>. Real WhatsApp Business
               features — catalog, templates, broadcasts, read receipts.
             </p>
 
@@ -124,17 +139,25 @@ export default function WhatsappRecoverySection() {
               {WA_CAPABILITIES.map((cap, i) => (
                 <motion.div
                   key={cap.label}
-                  className="rounded-xl border border-green-100 bg-green-50/30 p-3 transition-colors hover:border-green-300/50 hover:bg-green-50/60"
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.15 + i * 0.05 }}
                 >
-                  <i className={`${cap.icon} text-sm text-green-600`} aria-hidden />
-                  <p className="mt-2 font-poppins text-[10px] font-bold uppercase tracking-wide text-gray-800">
-                    {cap.label}
-                  </p>
-                  <p className="mt-0.5 font-poppins text-[9px] leading-snug text-gray-500">{cap.desc}</p>
+                  <EliteCard glow={GLOWS[i % GLOWS.length]}>
+                    <div className="p-3">
+                      <motion.i
+                        className={`${cap.icon} text-sm text-emerald-400`}
+                        whileHover={{ rotate: [0, -8, 8, 0], scale: 1.15 }}
+                        transition={{ duration: 0.45 }}
+                        aria-hidden
+                      />
+                      <p className="mt-2 font-poppins text-[10px] font-bold uppercase tracking-wide text-ink-primary">
+                        {cap.label}
+                      </p>
+                      <p className="mt-0.5 font-poppins text-[9px] leading-snug text-ink-muted">{cap.desc}</p>
+                    </div>
+                  </EliteCard>
                 </motion.div>
               ))}
             </div>
@@ -149,22 +172,24 @@ export default function WhatsappRecoverySection() {
               {FEATURES.map((item, i) => (
                 <motion.li
                   key={item.node}
-                  className="flex items-center gap-3 rounded-xl border border-transparent px-3 py-2 transition-colors hover:border-green-100 hover:bg-green-50/50"
+                  className="flex items-center gap-3 rounded-xl border border-transparent px-3 py-2 transition-colors hover:border-emerald-500/20 hover:bg-emerald-500/[0.06]"
                   initial={{ opacity: 0, x: -12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 + i * 0.08 }}
                   data-figma-node={item.node}
                 >
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-500/10">
-                    <i
-                      className="fas fa-check text-[10px] text-green-500"
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500/15">
+                    <motion.i
+                      className="fas fa-check text-[10px] text-emerald-400"
+                      whileHover={{ rotate: [0, -8, 8, 0], scale: 1.15 }}
+                      transition={{ duration: 0.45 }}
                       data-figma-node={item.iconNode}
                       aria-hidden
                     />
                   </span>
                   <span
-                    className="font-poppins text-[11px] font-bold uppercase tracking-wide text-gray-800"
+                    className="font-poppins text-[11px] font-bold uppercase tracking-wide text-ink-primary"
                     data-figma-node={item.textNode}
                   >
                     {item.text}
@@ -186,12 +211,12 @@ export default function WhatsappRecoverySection() {
         </div>
 
         <WhatsappSectionReveal className="mt-16 text-center" delay={0.15}>
-          <p className="font-poppins text-sm text-gray-500">
+          <p className="font-poppins text-sm text-ink-muted">
             Ready to recover lost revenue on autopilot?
           </p>
           <Link
-            href="/whatsapp"
-            className="mt-6 inline-flex items-center justify-center rounded-xl bg-green-500 px-10 py-4 font-poppins text-[10px] font-bold uppercase tracking-[0.25em] text-white shadow-[0_8px_28px_rgba(34,197,94,0.3)] transition-all hover:bg-green-600"
+            href="/services#contact"
+            className="zc-focus-ring mt-6 inline-flex items-center justify-center rounded-xl bg-emerald-500 px-10 py-4 font-poppins text-[10px] font-bold uppercase tracking-[0.25em] text-white shadow-[0_8px_28px_rgba(34,197,94,0.3)] transition-all hover:bg-emerald-400"
           >
             Activate WA-Z Node 01
           </Link>

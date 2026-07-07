@@ -1,6 +1,8 @@
-/** Landing page — clean light identity */
-export const LANDING_BG = "#FAFBFC" as const;
-export const LANDING_SURFACE = "#FFFFFF" as const;
-export const LANDING_BORDER = "#E5E7EB" as const;
-export const LANDING_TEXT = "#111827" as const;
-export const LANDING_MUTED = "#6B7280" as const;
+import { DS } from "./design-system";
+
+/** Landing page — dark-first AI identity */
+export const LANDING_BG = DS.surface.base;
+export const LANDING_SURFACE = DS.surface.raised;
+export const LANDING_BORDER = DS.surface.border;
+export const LANDING_TEXT = DS.text.primary;
+export const LANDING_MUTED = DS.text.secondary;

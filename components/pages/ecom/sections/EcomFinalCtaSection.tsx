@@ -3,51 +3,49 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
+import { MeshGradient } from "@/components/shared/MeshGradient";
 import { ECOM_SECTIONS } from "@/lib/ecom-tokens";
-import { HeroAmbientBackground } from "../shared/AmbientBackground";
+import { ECOM_THEME } from "@/lib/ecom-theme";
 import { EcomSectionReveal } from "../shared/EcomSectionReveal";
 
 export default function EcomFinalCtaSection() {
   return (
     <section
       id="consultation"
-      className="relative w-full overflow-hidden py-16 sm:py-20"
-      style={{ backgroundColor: "#FAFBFC" }}
-      data-header-surface="light"
+      className={`zc-grain relative w-full overflow-x-clip py-14 sm:py-16 md:py-20 lg:py-24 ${ECOM_THEME.bgAlt}`}
+      data-header-surface={ECOM_THEME.surface}
       data-figma-node={ECOM_SECTIONS.finalCta}
     >
-      <HeroAmbientBackground />
+      <MeshGradient className="opacity-50" />
+      <SectionAmbience variant="mixed" />
 
-      <SiteContainer className="relative">
+      <SiteContainer className="relative z-10">
         <EcomSectionReveal>
-          <motion.div
-            className="relative overflow-hidden rounded-3xl border border-brand-blue/15 bg-white p-8 sm:p-12 lg:p-14"
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6 }}
-          >
-            <div
-              className="pointer-events-none absolute inset-0 opacity-40"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle at 80% 20%, rgba(28,51,191,0.08) 0%, transparent 50%)",
-              }}
-              aria-hidden
-            />
+          <EliteCard glow="violet" className="overflow-hidden">
+            <div className="relative px-6 py-12 text-center sm:px-12 sm:py-14">
+              <div
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(108,76,241,0.22),transparent)]"
+                aria-hidden
+              />
 
-            <div className="relative mx-auto max-w-3xl text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/15 bg-brand-blue/5 px-3 py-1 font-poppins text-[11px] font-semibold text-brand-blue">
+              <motion.span
+                className={ECOM_THEME.badge}
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <span className="zc-live-dot h-1.5 w-1.5 rounded-full bg-accent-lime" />
                 Get started
-              </span>
+              </motion.span>
+
               <h2
-                className="mt-4 font-poppins text-[clamp(1.75rem,4vw,2.25rem)] font-bold leading-tight text-gray-900"
+                className={`mt-4 text-[clamp(1.75rem,4vw,2.25rem)] font-bold leading-tight ${ECOM_THEME.headline} ${ECOM_THEME.text}`}
                 data-figma-node="6:580"
               >
                 Start your e-commerce business with zero effort
               </h2>
               <p
-                className="mt-4 font-poppins text-base leading-relaxed text-gray-600 sm:text-lg"
+                className={`mx-auto mt-4 max-w-2xl text-base leading-relaxed sm:text-lg ${ECOM_THEME.textMuted}`}
                 data-figma-node="6:581"
               >
                 Whether you want to launch on Walmart, TikTok Shop, Etsy, eBay, Shopify, or Amazon,
@@ -57,22 +55,23 @@ export default function EcomFinalCtaSection() {
 
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
-                  href="#consultation"
-                  className="inline-flex h-12 w-full min-w-[220px] items-center justify-center rounded-xl bg-brand-blue px-8 font-poppins text-sm font-semibold text-white transition-colors hover:bg-brand-blue/90 sm:w-auto"
+                  href="/services#contact"
+                  className="zc-focus-ring group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-xl bg-accent-violet px-8 font-poppins text-sm font-semibold text-white shadow-glow transition-all hover:scale-[1.02] sm:w-auto sm:min-w-[220px]"
                   data-figma-node="6:582"
                 >
-                  Book Your Free Consultation
+                  <span className="relative z-10">Book Your Free Consultation</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-accent-violet to-accent-cyan opacity-0 transition-opacity group-hover:opacity-100" />
                 </Link>
                 <Link
                   href="#services"
-                  className="inline-flex h-12 w-full min-w-[220px] items-center justify-center rounded-xl border border-gray-200 bg-white px-8 font-poppins text-sm font-semibold text-gray-700 transition-colors hover:border-brand-blue/30 hover:text-brand-blue sm:w-auto"
+                  className="zc-focus-ring inline-flex h-12 w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 px-8 font-poppins text-sm font-semibold text-ink-primary transition-all hover:border-accent-violet/40 sm:w-auto sm:min-w-[220px]"
                   data-figma-node="6:584"
                 >
                   Start Your Store Today
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </EliteCard>
         </EcomSectionReveal>
       </SiteContainer>
     </section>

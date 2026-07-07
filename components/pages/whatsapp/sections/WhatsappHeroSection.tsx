@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useMotionValue, useSpring, type Variants } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
 import { CountUp } from "@/components/shared/CountUp";
+import { MeshGradient } from "@/components/shared/MeshGradient";
 import { WHATSAPP_SECTIONS } from "@/lib/whatsapp-tokens";
 import { WhatsappAmbientBackground } from "../shared/WhatsappAmbientBackground";
 import { WhatsappChatVisual } from "../shared/WhatsappChatVisual";
@@ -77,10 +78,11 @@ export default function WhatsappHeroSection() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[100dvh] w-full overflow-hidden bg-[#F6FBF7] pt-24 pb-16 sm:pt-28 sm:pb-20"
+      className="zc-grain relative min-h-0 lg:min-h-[100dvh] w-full overflow-x-clip overflow-hidden bg-[#F6FBF7] pt-[max(5.5rem,calc(4rem+env(safe-area-inset-top,0px)))] pb-16 sm:pt-28 sm:pb-20"
       data-header-surface="light"
       data-figma-node={WHATSAPP_SECTIONS.hero}
     >
+      <MeshGradient className="opacity-30" />
       <WhatsappAmbientBackground />
 
       <motion.div
@@ -101,7 +103,7 @@ export default function WhatsappHeroSection() {
           </Link>
         </motion.div>
 
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           <motion.div variants={containerVariants} initial="hidden" animate="visible" className="flex flex-col gap-7">
             <motion.div
               variants={itemVariants}

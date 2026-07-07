@@ -16,7 +16,7 @@ export const metadata = createPageMetadata("whatsapp");
  */
 export default function WhatsappPage() {
   return (
-    <PageShell className="bg-transparent" data-figma-node={WHATSAPP_PAGE_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={WHATSAPP_PAGE_NODE}>
       <div data-figma-node={WHATSAPP_FRAME_NODE}>
         <WhatsappHeroSection />
         <WhatsappRecoverySection />

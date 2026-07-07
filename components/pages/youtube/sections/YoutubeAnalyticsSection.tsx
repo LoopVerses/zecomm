@@ -21,15 +21,15 @@ export default function YoutubeAnalyticsSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-white py-24 lg:py-32"
-      data-header-surface="light"
+      className="relative w-full overflow-x-clip overflow-hidden bg-surface-base py-14 sm:py-16 md:py-20 lg:py-24"
+      data-header-surface="dark"
       data-figma-node={YOUTUBE_SECTIONS.analytics}
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 50% 50%, rgba(220,38,38,0.05) 1px, transparent 1px)",
+            "radial-gradient(circle at 50% 50%, rgba(220,38,38,0.15) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
         aria-hidden
@@ -38,18 +38,17 @@ export default function YoutubeAnalyticsSection() {
       <SiteContainer>
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
           <YoutubeSectionReveal>
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-red-600">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-600/25 bg-red-600/10 px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-red-400">
               <i className="fas fa-chart-bar text-[10px]" aria-hidden />
               Studio analytics
             </span>
             <h2
-              className="font-poppins text-[36px] font-light uppercase leading-[1.1] tracking-[-0.03em] text-gray-900 sm:text-[52px]"
+              className="font-display text-[clamp(2rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-tight text-ink-primary"
               data-figma-node="6:218"
             >
-              REAL-TIME
-              <br />
-              <span className="bg-gradient-to-r from-red-600 to-rose-500 bg-clip-text font-extrabold text-transparent">
-                ANALYTICS.
+              Real-time{" "}
+              <span className="bg-gradient-to-r from-red-500 to-rose-500 bg-clip-text text-transparent">
+                analytics.
               </span>
             </h2>
 
@@ -57,7 +56,7 @@ export default function YoutubeAnalyticsSection() {
               {METRICS.map((metric, i) => (
                 <motion.div
                   key={metric.node}
-                  className="group rounded-r-2xl border-l-4 border-red-600 bg-gray-50 py-5 pl-6 pr-4 transition-colors hover:bg-red-50/50"
+                  className="group rounded-r-2xl border-l-4 border-red-600 bg-surface-card py-5 pl-6 pr-4 transition-colors hover:border-red-500"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -70,12 +69,12 @@ export default function YoutubeAnalyticsSection() {
                       prefix={metric.prefix}
                       suffix={metric.suffix}
                       decimals={metric.decimals}
-                      className="font-poppins text-4xl font-extrabold text-gray-900"
+                      className="font-display text-4xl font-extrabold text-ink-primary"
                       data-figma-node={metric.valueNode}
                     />
                   </div>
                   <p
-                    className="mt-1 font-poppins text-[10px] font-bold uppercase tracking-[0.12em] text-gray-500"
+                    className="mt-1 font-poppins text-[10px] font-bold uppercase tracking-[0.12em] text-ink-muted"
                     data-figma-node={metric.labelNode}
                   >
                     {metric.label}
@@ -87,7 +86,7 @@ export default function YoutubeAnalyticsSection() {
 
           <YoutubeSectionReveal delay={0.15}>
             <div
-              className="overflow-hidden rounded-2xl border border-gray-200 bg-[#0f0f0f] p-8 shadow-[0_20px_60px_rgba(220,38,38,0.12)]"
+              className="overflow-hidden rounded-2xl border border-white/10 bg-surface-card p-8 shadow-card"
               data-figma-node="6:228"
             >
               <div className="flex items-start justify-between">
@@ -98,7 +97,7 @@ export default function YoutubeAnalyticsSection() {
                   >
                     Growth Trajectory
                   </p>
-                  <p className="mt-1 font-poppins text-xs text-gray-500">Last 8 weeks · all channels</p>
+                  <p className="mt-1 font-poppins text-xs text-ink-muted">Last 8 weeks · all channels</p>
                 </div>
                 <span
                   className="rounded-full bg-red-600/20 px-2.5 py-1 font-poppins text-[9px] font-bold uppercase text-red-400"
@@ -122,7 +121,7 @@ export default function YoutubeAnalyticsSection() {
 
               <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
                 <p
-                  className="font-poppins text-[10px] text-gray-500"
+                  className="font-poppins text-[10px] text-ink-muted"
                   data-figma-node="6:231"
                 >
                   Viral probability:{" "}

@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
 import { CHAT_AGENT_SECTIONS } from "@/lib/chat-agent-tokens";
 import { BuyerJourneyMap } from "../shared/BuyerJourneyMap";
 import {
@@ -10,6 +11,8 @@ import {
   staggerContainer,
   staggerItem,
 } from "../shared/ChatAgentSectionReveal";
+
+const GLOWS = ["violet", "cyan", "lime", "red"] as const;
 
 const STEPS = [
   {
@@ -45,20 +48,22 @@ export default function ChatAgentLogicFeedSection() {
   return (
     <section
       id="logic-feed"
-      className="relative w-full overflow-hidden border-t border-white/5 bg-[#040810] py-24 lg:py-32"
+      className="relative w-full overflow-x-clip overflow-hidden border-t border-white/10 bg-surface-base py-14 sm:py-16 md:py-20 lg:py-24"
       data-header-surface="dark"
       data-figma-node={CHAT_AGENT_SECTIONS.logicFeed}
     >
-      <SiteContainer>
+      <SectionAmbience variant="mixed" />
+
+      <SiteContainer className="relative z-10">
         <ChatAgentSectionReveal className="text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-blue/25 bg-brand-blue/10 px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-brand-blue">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-violet/25 bg-accent-violet/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-accent-violet">
             Sales psychology engine
           </span>
-          <h2 className="font-poppins uppercase tracking-[-0.03em]" data-figma-node="6:283">
-            <span className="block text-[36px] font-light leading-tight text-white sm:text-[48px]" data-figma-node="6:284">
+          <h2 className="font-display text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight text-ink-primary" data-figma-node="6:283">
+            <span className="block" data-figma-node="6:284">
               FROM VISITOR
             </span>
-            <span className="block bg-gradient-to-r from-brand-blue to-cyan-400 bg-clip-text text-[32px] font-extrabold leading-tight text-transparent sm:text-[40px]" data-figma-node="6:285">
+            <span className="block bg-gradient-to-r from-accent-violet to-accent-cyan bg-clip-text text-transparent" data-figma-node="6:285">
               TO CLOSED DEAL
             </span>
           </h2>
@@ -76,36 +81,31 @@ export default function ChatAgentLogicFeedSection() {
           animate={stepsInView ? "visible" : "hidden"}
         >
           {STEPS.map((step, i) => (
-            <motion.article
-              key={step.node}
-              variants={staggerItem}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-brand-blue/25 hover:bg-brand-blue/[0.05]"
-              whileHover={{ y: -4 }}
-              data-figma-node={step.node}
-            >
-              <motion.span
-                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-brand-blue/[0.08] to-transparent opacity-0"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%", opacity: 1 }}
-                transition={{ duration: 0.55 }}
-                aria-hidden
-              />
-              <span className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-brand-blue/15">
-                <i className={`${step.icon} text-base text-brand-blue`} aria-hidden />
-              </span>
-              <h3
-                className="relative mt-4 font-poppins text-[10px] font-bold uppercase tracking-wider text-brand-blue"
-                data-figma-node={step.titleNode}
-              >
-                0{i + 1}. {step.title}
-              </h3>
-              <p
-                className="relative mt-2 font-poppins text-sm leading-relaxed text-gray-400"
-                data-figma-node={step.bodyNode}
-              >
-                {step.body}
-              </p>
-            </motion.article>
+            <motion.div key={step.node} variants={staggerItem} className="h-full" data-figma-node={step.node}>
+              <EliteCard glow={GLOWS[i % GLOWS.length]} className="h-full">
+                <div className="group relative p-6">
+                  <motion.span
+                    className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-accent-violet/15"
+                    whileHover={{ rotate: [0, -8, 8, 0], scale: 1.08 }}
+                    transition={{ duration: 0.45 }}
+                  >
+                    <i className={`${step.icon} text-base text-accent-violet`} aria-hidden />
+                  </motion.span>
+                  <h3
+                    className="relative mt-4 font-poppins text-[10px] font-bold uppercase tracking-wider text-accent-violet"
+                    data-figma-node={step.titleNode}
+                  >
+                    0{i + 1}. {step.title}
+                  </h3>
+                  <p
+                    className="relative mt-2 font-poppins text-sm leading-relaxed text-ink-secondary"
+                    data-figma-node={step.bodyNode}
+                  >
+                    {step.body}
+                  </p>
+                </div>
+              </EliteCard>
+            </motion.div>
           ))}
         </motion.div>
       </SiteContainer>

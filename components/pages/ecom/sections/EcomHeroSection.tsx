@@ -1,21 +1,24 @@
 "use client";
 
-import React, { useRef } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard } from "@/components/shared/EliteCard";
+import { MeshGradient } from "@/components/shared/MeshGradient";
+import { Tilt3D } from "@/components/shared/Tilt3D";
+import { EASE_OUT } from "@/lib/design-system";
 import { ECOM_SECTIONS } from "@/lib/ecom-tokens";
-import { ECOM_PAGE_BG } from "@/lib/ecom-theme";
-import { HeroAmbientBackground } from "../shared/AmbientBackground";
+import { ECOM_PAGE_BG, ECOM_THEME } from "@/lib/ecom-theme";
 import { EcomStorefrontVisual } from "../shared/EcomStorefrontVisual";
+import { StaggeredHeadline } from "../shared/StaggeredHeadline";
 import { StoreBrandChip, StoreBrandId } from "../shared/StoreBrandLogos";
 
 const PLATFORMS: StoreBrandId[] = ["walmart", "tiktok", "etsy", "ebay", "shopify", "amazon"];
 
 const QUICK_STATS = [
-  { value: "6", label: "Marketplaces" },
-  { value: "A-Z", label: "Management" },
-  { value: "Zero", label: "Effort for you" },
+  { value: "6", label: "Marketplaces", glow: "violet" as const },
+  { value: "A-Z", label: "Management", glow: "cyan" as const },
+  { value: "Zero", label: "Effort for you", glow: "lime" as const },
 ] as const;
 
 const containerVariants = {
@@ -31,38 +34,30 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.7, ease: EASE_OUT },
   },
 } satisfies Variants;
 
 export default function EcomHeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const bgMouseX = useMotionValue(0);
-  const bgMouseY = useMotionValue(0);
-  const bgGlowX = useSpring(bgMouseX, { stiffness: 50, damping: 24 });
-  const bgGlowY = useSpring(bgMouseY, { stiffness: 50, damping: 24 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const { left, top } = containerRef.current.getBoundingClientRect();
-    bgMouseX.set(e.clientX - left);
-    bgMouseY.set(e.clientY - top);
-  };
-
   return (
     <section
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="relative min-h-[100dvh] w-full overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20"
+      className="zc-grain relative min-h-0 lg:min-h-[100dvh] w-full overflow-x-clip overflow-hidden pt-[max(5.5rem,calc(4rem+env(safe-area-inset-top,0px)))] pb-16 sm:pt-28 sm:pb-20"
       style={{ backgroundColor: ECOM_PAGE_BG }}
-      data-header-surface="light"
+      data-header-surface={ECOM_THEME.surface}
       data-figma-node={ECOM_SECTIONS.hero}
     >
-      <HeroAmbientBackground />
+      <MeshGradient />
 
       <motion.div
-        className="pointer-events-none absolute h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(28,51,191,0.07)_0%,transparent_65%)] blur-[80px]"
-        style={{ left: bgGlowX, top: bgGlowY }}
+        className="pointer-events-none absolute left-[10%] top-[20%] h-2 w-2 rounded-full bg-accent-violet/60 blur-[1px]"
+        animate={{ y: [0, -14, 0], opacity: [0.4, 1, 0.4] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        aria-hidden
+      />
+      <motion.div
+        className="pointer-events-none absolute right-[14%] top-[35%] h-1.5 w-1.5 rounded-full bg-accent-cyan/70"
+        animate={{ y: [0, 12, 0], opacity: [0.3, 0.9, 0.3] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
         aria-hidden
       />
 
@@ -75,7 +70,7 @@ export default function EcomHeroSection() {
         >
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 font-poppins text-[11px] font-semibold text-gray-600 shadow-sm transition-all hover:border-brand-blue/30 hover:text-brand-blue"
+            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 font-poppins text-[11px] font-semibold text-ink-secondary backdrop-blur-sm transition-all hover:border-accent-violet/30 hover:text-ink-primary"
             data-figma-node="8:991"
           >
             <span className="transition-transform group-hover:-translate-x-0.5">←</span>
@@ -90,27 +85,74 @@ export default function EcomHeroSection() {
             initial="hidden"
             animate="visible"
           >
-            <motion.span
-              variants={itemVariants}
-              className="inline-flex w-fit items-center gap-2 rounded-full border border-brand-blue/15 bg-brand-blue/5 px-3 py-1 font-poppins text-[11px] font-semibold text-brand-blue"
-              data-figma-node="6:492"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
-              Zero Effort E-Commerce Solutions
-            </motion.span>
+            <motion.div variants={itemVariants}>
+              <EliteCard glow="violet" className="max-w-md rounded-2xl">
+                <div className="p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-2 rounded-lg border border-accent-lime/30 bg-accent-lime/10 px-2.5 py-1 font-poppins text-[10px] font-semibold text-accent-lime">
+                      <span className="zc-live-dot h-1.5 w-1.5 rounded-full bg-accent-lime" />
+                      Live stores
+                    </span>
+                    <span className="font-poppins text-[10px] text-ink-muted">6 marketplaces</span>
+                  </div>
+                  <p className="mt-3 font-display text-sm font-bold text-ink-primary sm:text-base">
+                    <span className="bg-gradient-to-r from-accent-violet to-accent-cyan bg-clip-text text-transparent">
+                      Zero Effort
+                    </span>{" "}
+                    E-Commerce Solutions
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {["Amazon", "Shopify", "TikTok"].map((chip) => (
+                      <span
+                        key={chip}
+                        className="rounded-lg border border-white/8 bg-surface-base/60 px-2.5 py-1 font-poppins text-[10px] text-ink-secondary"
+                      >
+                        {chip}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </EliteCard>
+            </motion.div>
 
-            <motion.h1
-              variants={itemVariants}
-              className="font-poppins text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.12] tracking-[-0.03em] text-gray-900"
-              data-figma-node="6:495"
-            >
-              Build, Manage &amp; Scale Your E-Commerce Business{" "}
-              <span className="text-brand-blue">With Zero Effort</span>
-            </motion.h1>
+            <motion.div variants={itemVariants}>
+              <StaggeredHeadline
+                className={`${ECOM_THEME.headline} text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.12] tracking-[-0.03em] text-ink-primary`}
+                data-figma-node="6:495"
+                lines={[
+                  {
+                    words: [
+                      { text: "Build," },
+                      { text: "Manage" },
+                      { text: "&" },
+                      { text: "Scale" },
+                      { text: "Your" },
+                      { text: "E-Commerce" },
+                      { text: "Business" },
+                    ],
+                  },
+                  {
+                    words: [
+                      { text: "With" },
+                      {
+                        text: "Zero",
+                        className:
+                          "bg-gradient-to-r from-accent-violet via-accent-cyan to-accent-violet bg-clip-text text-transparent",
+                      },
+                      {
+                        text: "Effort",
+                        className:
+                          "bg-gradient-to-r from-accent-violet via-accent-cyan to-accent-violet bg-clip-text text-transparent",
+                      },
+                    ],
+                  },
+                ]}
+              />
+            </motion.div>
 
             <motion.p
               variants={itemVariants}
-              className="max-w-lg font-poppins text-base leading-relaxed text-gray-600 sm:text-[15px]"
+              className={`max-w-lg text-base leading-relaxed sm:text-[15px] ${ECOM_THEME.textMuted}`}
               data-figma-node="6:496"
             >
               At Zeecom, we provide complete A-Z e-commerce automation and marketplace management
@@ -131,25 +173,28 @@ export default function EcomHeroSection() {
             >
               <Link
                 href="#consultation"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-blue px-8 font-poppins text-sm font-semibold text-white transition-colors hover:bg-brand-blue/90"
+                className="zc-focus-ring group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl bg-accent-violet px-8 font-poppins text-sm font-semibold text-white shadow-glow transition-all hover:scale-[1.02]"
                 data-figma-node="6:497"
               >
-                Get Started Today
+                <span className="relative z-10">Get Started Today</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-accent-violet to-accent-cyan opacity-0 transition-opacity group-hover:opacity-100" />
               </Link>
               <Link
                 href="#consultation"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-gray-200 bg-white px-8 font-poppins text-sm font-semibold text-gray-700 transition-colors hover:border-brand-blue/30 hover:text-brand-blue"
+                className="zc-focus-ring inline-flex h-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-8 font-poppins text-sm font-semibold text-ink-primary backdrop-blur-sm transition-all hover:border-accent-violet/40"
               >
                 Book a Free Consultation
               </Link>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-6 pt-2">
+            <motion.div variants={itemVariants} className="grid grid-cols-3 gap-3 border-t border-white/8 pt-6">
               {QUICK_STATS.map((stat) => (
-                <div key={stat.label}>
-                  <p className="font-poppins text-xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="font-poppins text-xs text-gray-500">{stat.label}</p>
-                </div>
+                <EliteCard key={stat.label} glow={stat.glow} className="rounded-xl">
+                  <div className="px-3 py-3 text-center">
+                    <p className={`${ECOM_THEME.headline} text-xl font-bold text-ink-primary`}>{stat.value}</p>
+                    <p className={`text-[10px] sm:text-xs ${ECOM_THEME.textSubtle}`}>{stat.label}</p>
+                  </div>
+                </EliteCard>
               ))}
             </motion.div>
           </motion.div>
@@ -157,9 +202,12 @@ export default function EcomHeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+            transition={{ duration: 0.8, delay: 0.15, ease: EASE_OUT }}
+            style={{ perspective: 1200 }}
           >
-            <EcomStorefrontVisual />
+            <Tilt3D>
+              <EcomStorefrontVisual />
+            </Tilt3D>
           </motion.div>
         </div>
       </SiteContainer>

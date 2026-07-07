@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { SectionAmbience } from "@/components/shared/EliteCard";
+import { ScrollReveal } from "@/components/shared/ScrollReveal";
+import { LANDING_BG } from "@/lib/landing-theme";
 
 export const FAQ_NODE = "6:240";
 
 const FAQS = [
   {
-    q: "Do I need to use all 8 services?",
+    q: "Do I need to use all services?",
     a: "No. Pick only what your business needs. Many customers start with one tool, like WhatsApp or Email, and add more later.",
   },
   {
@@ -20,7 +24,7 @@ const FAQS = [
   },
   {
     q: "What if I need help?",
-    a: "Every service page includes detailed info and examples. You can also reach out through our contact options in the footer.",
+    a: "Reach out through our contact page. Every service includes detailed info and examples to get you started.",
   },
   {
     q: "Is my data secure?",
@@ -34,44 +38,69 @@ export default function FaqSection() {
   return (
     <section
       id="faq"
-      className="w-full bg-white py-16 sm:py-20"
-      data-header-surface="light"
+      className="relative w-full overflow-x-clip py-14 sm:py-16 md:py-20 lg:py-24"
+      style={{ backgroundColor: LANDING_BG }}
+      data-header-surface="dark"
       data-figma-node={FAQ_NODE}
     >
-      <SiteContainer>
+      <SectionAmbience variant="mixed" />
+
+      <SiteContainer className="relative z-10">
         <div className="mx-auto max-w-2xl">
-          <div className="text-center">
-            <h2 className="font-poppins text-[clamp(1.75rem,4vw,2.25rem)] font-bold text-gray-900">
+          <ScrollReveal className="text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-1.5 font-poppins text-[11px] font-semibold text-ink-secondary">
+              FAQ
+            </span>
+            <h2 className="mt-4 font-display text-[clamp(1.65rem,4.5vw,2.75rem)] font-bold text-ink-primary">
               Common questions
             </h2>
-            <p className="mt-3 font-poppins text-base text-gray-500">
-              Quick answers before you get started.
-            </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="mt-10 divide-y divide-gray-200 rounded-2xl border border-gray-200">
+          <div className="mt-10 space-y-3">
             {FAQS.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
-                <div key={faq.q}>
+                <motion.div
+                  key={faq.q}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ y: -2 }}
+                  className={`overflow-hidden rounded-xl border backdrop-blur-sm transition-all duration-300 ${
+                    isOpen
+                      ? "border-accent-violet/35 bg-surface-card shadow-glow"
+                      : "border-white/8 bg-surface-card/50 hover:border-accent-violet/20 hover:bg-surface-card/80"
+                  }`}
+                >
                   <button
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-gray-50"
+                    className="zc-focus-ring flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
                     aria-expanded={isOpen}
                   >
-                    <span className="font-poppins text-sm font-semibold text-gray-900">{faq.q}</span>
-                    <i
-                      className={`fas fa-chevron-down shrink-0 text-xs text-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                      aria-hidden
-                    />
+                    <span className="font-poppins text-sm font-semibold text-ink-primary">{faq.q}</span>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 180 : 0, backgroundColor: isOpen ? "rgba(108,76,241,0.15)" : "rgba(255,255,255,0.05)" }}
+                      transition={{ duration: 0.25 }}
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                    >
+                      <i className={`fas fa-chevron-down text-[10px] ${isOpen ? "text-accent-violet" : "text-ink-muted"}`} aria-hidden />
+                    </motion.span>
                   </button>
-                  {isOpen && (
-                    <div className="px-5 pb-4">
-                      <p className="font-poppins text-sm leading-relaxed text-gray-500">{faq.a}</p>
-                    </div>
-                  )}
-                </div>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <p className="px-5 pb-4 font-poppins text-sm leading-relaxed text-ink-secondary">{faq.a}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               );
             })}
           </div>

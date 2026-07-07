@@ -3,18 +3,20 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
 import { EMAIL_SECTIONS } from "@/lib/email-tokens";
-import { EMAIL_PLUM, EMAIL_PARCHMENT } from "@/lib/email-theme";
 import {
   EmailSectionReveal,
   staggerContainer,
   staggerItem,
 } from "../shared/EmailSectionReveal";
 
+const GLOWS = ["violet", "cyan", "lime", "red"] as const;
+
 const METRICS = [
-  { value: 84, suffix: "%", label: "Response time cut", stamp: "#7C3AED", decimals: 0 },
-  { value: 14, suffix: "hr", label: "Founder time saved / week", stamp: "#C2410C", decimals: 0 },
-  { value: 0.1, suffix: "s", label: "Processing latency", stamp: "#059669", decimals: 1 },
+  { value: 84, suffix: "%", label: "Response time cut", accent: "text-accent-violet", decimals: 0 },
+  { value: 14, suffix: "hr", label: "Founder time saved / week", accent: "text-orange-400", decimals: 0 },
+  { value: 0.1, suffix: "s", label: "Processing latency", accent: "text-accent-lime", decimals: 1 },
 ] as const;
 
 export default function EmailTelemetrySection() {
@@ -23,27 +25,22 @@ export default function EmailTelemetrySection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden py-20 lg:py-28"
-      style={{ backgroundColor: EMAIL_PLUM }}
+      className="relative w-full overflow-x-clip overflow-hidden border-t border-white/10 bg-surface-raised py-14 sm:py-16 md:py-20 lg:py-24"
       data-header-surface="dark"
       data-figma-node={EMAIL_SECTIONS.telemetry}
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-3 opacity-30"
-        style={{
-          backgroundImage: `repeating-linear-gradient(90deg, ${EMAIL_PARCHMENT} 0px, ${EMAIL_PARCHMENT} 8px, transparent 8px, transparent 16px)`,
-        }}
-        aria-hidden
-      />
+      <SectionAmbience variant="mixed" />
 
-      <SiteContainer className="relative">
+      <SiteContainer className="relative z-10">
         <EmailSectionReveal className="text-center">
-          <p className="font-poppins text-[10px] font-bold uppercase tracking-[0.3em] text-violet-300">
+          <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/25 bg-orange-500/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-orange-400">
             Scanner telemetry
-          </p>
-          <h2 className="mt-3 font-poppins text-[clamp(2rem,4.5vw,3.25rem)] font-light text-white">
+          </span>
+          <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-tight text-ink-primary">
             Performance{" "}
-            <span className="font-extrabold italic text-orange-300">stamps.</span>
+            <span className="bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent">
+              stamps.
+            </span>
           </h2>
         </EmailSectionReveal>
 
@@ -54,33 +51,34 @@ export default function EmailTelemetrySection() {
           initial="hidden"
           animate={gridInView ? "visible" : "hidden"}
         >
-          {METRICS.map((metric) => (
-            <motion.article
-              key={metric.label}
-              variants={staggerItem}
-              className="relative bg-white p-8 text-center"
-              style={{
-                clipPath: "polygon(0 8%, 8% 0, 100% 0, 100% 92%, 92% 100%, 0 100%)",
-              }}
-            >
-              <div
-                className="mx-auto mb-4 flex h-14 w-14 items-center justify-center border-2 border-dashed"
-                style={{ borderColor: metric.stamp, color: metric.stamp }}
-              >
-                <i className="fas fa-stamp text-lg" aria-hidden />
-              </div>
-                <p className="flex items-end justify-center gap-0.5">
-                  <span className="font-poppins text-5xl font-extrabold text-stone-900">
-                    {metric.value}
-                  </span>
-                <span className="mb-2 font-poppins text-xl font-bold" style={{ color: metric.stamp }}>
-                  {metric.suffix}
-                </span>
-              </p>
-              <p className="mt-3 font-poppins text-[10px] font-bold uppercase tracking-[0.15em] text-stone-500">
-                {metric.label}
-              </p>
-            </motion.article>
+          {METRICS.map((metric, i) => (
+            <motion.div key={metric.label} variants={staggerItem} className="h-full">
+              <EliteCard glow={GLOWS[i % GLOWS.length]} className="h-full">
+                <div className="relative p-8 text-center">
+                  <div
+                    className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl border border-dashed border-white/15 ${metric.accent}`}
+                  >
+                    <motion.i
+                      className="fas fa-stamp text-lg"
+                      whileHover={{ rotate: [0, -8, 8, 0], scale: 1.15 }}
+                      transition={{ duration: 0.45 }}
+                      aria-hidden
+                    />
+                  </div>
+                  <p className="flex items-end justify-center gap-0.5">
+                    <span className="font-poppins text-5xl font-extrabold text-ink-primary">
+                      {metric.value}
+                    </span>
+                    <span className={`mb-2 font-poppins text-xl font-bold ${metric.accent}`}>
+                      {metric.suffix}
+                    </span>
+                  </p>
+                  <p className="mt-3 font-poppins text-[10px] font-bold uppercase tracking-[0.15em] text-ink-muted">
+                    {metric.label}
+                  </p>
+                </div>
+              </EliteCard>
+            </motion.div>
           ))}
         </motion.div>
       </SiteContainer>

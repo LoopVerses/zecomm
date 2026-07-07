@@ -20,7 +20,7 @@ export const metadata = createPageMetadata("chatAgent");
  */
 export default function ChatAgentPage() {
   return (
-    <PageShell className="bg-transparent" data-figma-node={CHAT_AGENT_PAGE_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={CHAT_AGENT_PAGE_NODE}>
       <div data-figma-node={CHAT_AGENT_FRAME_NODE}>
         <ChatAgentHeroSection />
         <ChatAgentCloserMarquee />

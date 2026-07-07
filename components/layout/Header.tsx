@@ -37,8 +37,8 @@ function StaggerNavText({
       {label.split("").map((char, index) => (
         <span
           key={`${label}-${index}`}
-          className={`inline-block transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[3px] group-hover:text-brand-blue group-focus-visible:-translate-y-[3px] group-focus-visible:text-brand-blue ${
-            active ? "text-brand-blue" : idleColor
+          className={`inline-block transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[3px] group-hover:text-accent-violet group-focus-visible:-translate-y-[3px] group-focus-visible:text-accent-violet ${
+            active ? "text-accent-violet" : idleColor
           }`}
           style={{ transitionDelay: `${index * 18}ms` }}
         >
@@ -149,7 +149,7 @@ function Logo({ surface, compact = false }: { surface: HeaderSurface; compact?: 
             ZEECOM
           </span>
           <span
-            className={`mt-0.5 font-poppins text-[7px] font-medium uppercase tracking-[0.18em] transition-colors duration-500 sm:text-[8px] sm:tracking-[0.2em] ${
+            className={`mt-0.5 hidden font-poppins text-[7px] font-medium uppercase tracking-[0.18em] transition-colors duration-500 xs:block sm:text-[8px] sm:tracking-[0.2em] ${
               isLight ? "text-black/45" : "text-white/50"
             }`}
             data-figma-node="7:971"
@@ -166,7 +166,6 @@ function NavLink({
   href,
   label,
   active,
-  id,
   surface,
   onClick,
   mobile = false,
@@ -174,7 +173,6 @@ function NavLink({
   href: string;
   label: string;
   active: boolean;
-  id: string;
   surface: HeaderSurface;
   onClick?: () => void;
   mobile?: boolean;
@@ -186,23 +184,16 @@ function NavLink({
       <Link
         href={href}
         onClick={onClick}
-        className={`flex items-center justify-between rounded-xl border px-4 py-3.5 transition-all ${
+        className={`flex items-center rounded-xl border px-4 py-3.5 transition-all ${
           active
-            ? "border-brand-blue/30 bg-brand-blue/10"
+            ? "border-accent-violet/30 bg-accent-violet/10"
             : isLight
-              ? "border-gray-100 bg-gray-50/80 hover:border-brand-blue/20 hover:bg-brand-blue/5"
-              : "border-white/10 bg-white/[0.04] hover:border-brand-blue/30 hover:bg-brand-blue/10"
+              ? "border-gray-100 bg-gray-50/80 hover:border-accent-violet/20 hover:bg-accent-violet/5"
+              : "border-white/10 bg-white/[0.04] hover:border-accent-violet/30 hover:bg-accent-violet/10"
         }`}
         aria-current={active ? "page" : undefined}
       >
         <StaggerNavText label={label} active={active} surface={surface} mobile />
-        <span
-          className={`font-poppins text-[10px] font-medium tabular-nums ${
-            active ? "text-brand-blue" : isLight ? "text-black/30" : "text-white/30"
-          }`}
-        >
-          {id}
-        </span>
       </Link>
     );
   }
@@ -211,25 +202,15 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="group relative flex items-center px-2.5 py-2 transition-colors duration-500 xl:px-3"
+      className="group relative flex items-center px-3 py-2 transition-colors duration-200"
       aria-current={active ? "page" : undefined}
     >
       <span
-        className={`absolute bottom-0 left-0 h-0.5 bg-brand-blue transition-all duration-300 ${
+        className={`absolute bottom-0 left-0 h-0.5 bg-accent-violet transition-all duration-300 ${
           active ? "w-full" : "w-0 group-hover:w-full"
         }`}
       />
-
-      <div className="relative z-10 flex flex-col gap-0.5">
-        <span
-          className={`font-poppins text-[7px] font-medium tracking-widest transition-colors duration-500 group-hover:text-brand-blue/80 ${
-            isLight ? "text-black/35" : "text-white/35"
-          }`}
-        >
-          {id}
-        </span>
-        <StaggerNavText label={label} active={active} surface={surface} />
-      </div>
+      <StaggerNavText label={label} active={active} surface={surface} />
     </Link>
   );
 }
@@ -266,7 +247,7 @@ export default function Header() {
     : "border-b border-transparent bg-transparent";
 
   const menuBtnClass = menuOpen
-    ? "border-brand-blue/40 bg-brand-blue/10"
+    ? "border-accent-violet/40 bg-accent-violet/10"
     : isLight
       ? "border-black/10 bg-black/[0.04]"
       : "border-white/15 bg-white/10";
@@ -301,12 +282,17 @@ export default function Header() {
                   href={link.href}
                   label={link.label}
                   active={isNavActive(pathname, link.href)}
-                  id={link.id}
                   surface={surface}
                 />
               </li>
             ))}
           </ul>
+          <Link
+            href="/services#contact"
+            className="hidden shrink-0 rounded-xl bg-accent-violet px-4 py-2 font-poppins text-[11px] font-semibold text-white shadow-glow transition-all hover:scale-[1.02] sm:inline-flex"
+          >
+            Contact
+          </Link>
           <LiveStatusBadge surface={surface} />
         </nav>
 
@@ -323,7 +309,7 @@ export default function Header() {
           >
             <span
               className={`block h-0.5 w-5 transition-all duration-300 ${
-                menuOpen ? "translate-y-2 rotate-45 bg-brand-blue" : menuLineClass
+                menuOpen ? "translate-y-2 rotate-45 bg-accent-violet" : menuLineClass
               }`}
             />
             <span
@@ -333,7 +319,7 @@ export default function Header() {
             />
             <span
               className={`block h-0.5 w-5 transition-all duration-300 ${
-                menuOpen ? "-translate-y-2 -rotate-45 bg-brand-blue" : menuLineClass
+                menuOpen ? "-translate-y-2 -rotate-45 bg-accent-violet" : menuLineClass
               }`}
             />
           </motion.button>
@@ -384,7 +370,6 @@ export default function Header() {
                         href={link.href}
                         label={link.label}
                         active={isNavActive(pathname, link.href)}
-                        id={link.id}
                         surface={surface}
                         onClick={() => setMenuOpen(false)}
                         mobile
@@ -397,7 +382,7 @@ export default function Header() {
                   <Link
                     href="/services#contact"
                     onClick={() => setMenuOpen(false)}
-                    className="inline-flex h-11 items-center justify-center rounded-xl bg-brand-blue font-poppins text-sm font-semibold text-white transition-colors hover:bg-brand-blue/90"
+                    className="inline-flex h-11 items-center justify-center rounded-xl bg-accent-violet font-poppins text-sm font-semibold text-white transition-colors hover:bg-accent-violet/90"
                   >
                     Contact Us
                   </Link>
@@ -406,8 +391,8 @@ export default function Header() {
                     onClick={() => setMenuOpen(false)}
                     className={`inline-flex h-11 items-center justify-center rounded-xl border font-poppins text-sm font-semibold transition-colors ${
                       isLight
-                        ? "border-gray-200 bg-white text-gray-700 hover:border-brand-blue/30 hover:text-brand-blue"
-                        : "border-white/15 bg-white/5 text-white hover:border-brand-blue/40"
+                        ? "border-gray-200 bg-white text-gray-700 hover:border-accent-violet/30 hover:text-accent-violet"
+                        : "border-white/15 bg-white/5 text-white hover:border-accent-violet/40"
                     }`}
                   >
                     View All Services

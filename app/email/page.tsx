@@ -20,7 +20,7 @@ export const metadata = createPageMetadata("email");
  */
 export default function EmailPage() {
   return (
-    <PageShell className="bg-transparent" data-figma-node={EMAIL_PAGE_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={EMAIL_PAGE_NODE}>
       <div data-figma-node={EMAIL_FRAME_NODE}>
         <EmailHeroSection />
         <ThreadRibbonSection />

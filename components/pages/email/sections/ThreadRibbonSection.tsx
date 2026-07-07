@@ -1,7 +1,6 @@
 "use client";
 
 import { EMAIL_SECTIONS } from "@/lib/email-tokens";
-import { EMAIL_PLUM, EMAIL_PARCHMENT } from "@/lib/email-theme";
 
 type ThreadItem = {
   from: string;
@@ -31,22 +30,22 @@ function ThreadColumn({ items, direction }: { items: ThreadItem[]; direction: "u
         {doubled.map((thread, i) => (
           <div
             key={`${thread.from}-${i}`}
-            className={`flex items-center gap-3 border-l-2 bg-white/5 px-3 py-2 ${
+            className={`flex items-center gap-3 border-l-2 bg-white/[0.03] px-3 py-2 ${
               thread.purged
-                ? "border-stone-600 opacity-40 line-through"
+                ? "border-white/20 opacity-40 line-through"
                 : thread.priority
                   ? "border-orange-500"
-                  : "border-violet-500/50"
+                  : "border-accent-violet/50"
             }`}
           >
             {thread.priority && !thread.purged && (
-              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500" />
+              <span className="zc-live-dot h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500" />
             )}
             <div className="min-w-0 flex-1">
-              <p className="truncate font-poppins text-[10px] font-semibold text-white">{thread.subject}</p>
-              <p className="truncate font-poppins text-[8px] text-stone-400">{thread.from}</p>
+              <p className="truncate font-poppins text-[10px] font-semibold text-ink-primary">{thread.subject}</p>
+              <p className="truncate font-poppins text-[8px] text-ink-muted">{thread.from}</p>
             </div>
-            <span className="shrink-0 font-mono text-[8px] text-violet-300">{thread.time}</span>
+            <span className="shrink-0 font-mono text-[8px] text-orange-400/80">{thread.time}</span>
           </div>
         ))}
       </div>
@@ -60,21 +59,17 @@ export default function ThreadRibbonSection() {
 
   return (
     <section
-      className="relative overflow-hidden border-y-2 border-violet-900"
-      style={{ backgroundColor: EMAIL_PLUM }}
+      className="relative overflow-x-clip overflow-hidden border-y border-white/10 bg-surface-base"
       data-header-surface="dark"
       data-figma-node={EMAIL_SECTIONS.ribbon}
       aria-label="Live email thread ribbon"
     >
       <div className="flex flex-col lg:flex-row">
-        <div
-          className="flex shrink-0 flex-col justify-center gap-1 border-b border-violet-800 px-6 py-4 lg:w-44 lg:border-b-0 lg:border-r"
-          style={{ backgroundColor: EMAIL_PARCHMENT }}
-        >
-          <p className="font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-violet-800">
+        <div className="flex shrink-0 flex-col justify-center gap-1 border-b border-white/10 bg-surface-raised px-6 py-4 lg:w-44 lg:border-b-0 lg:border-r">
+          <p className="font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-orange-400">
             Thread feed
           </p>
-          <p className="font-poppins text-sm font-bold text-stone-800">Live stream</p>
+          <p className="font-poppins text-sm font-bold text-ink-primary">Live stream</p>
         </div>
 
         <div className="grid min-w-0 flex-1 grid-cols-1 sm:grid-cols-2">
@@ -82,11 +77,11 @@ export default function ThreadRibbonSection() {
           <ThreadColumn items={col2} direction="down" />
         </div>
 
-        <div className="hidden shrink-0 flex-col justify-center gap-2 border-l border-violet-800 px-4 py-3 xl:flex">
+        <div className="hidden shrink-0 flex-col justify-center gap-2 border-l border-white/10 px-4 py-3 xl:flex">
           {["Intent locked", "Draft ready", "Spam purged", "Lead flagged"].map((label) => (
             <span
               key={label}
-              className="whitespace-nowrap border border-violet-700 px-2.5 py-1 font-poppins text-[8px] font-bold uppercase tracking-wider text-violet-300"
+              className="whitespace-nowrap rounded-md border border-orange-500/25 bg-orange-500/10 px-2.5 py-1 font-poppins text-[8px] font-bold uppercase tracking-wider text-orange-400"
             >
               {label}
             </span>

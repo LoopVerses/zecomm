@@ -20,7 +20,7 @@ export const metadata = createPageMetadata("voiceClone");
  */
 export default function VoiceClonePage() {
   return (
-    <PageShell className="bg-transparent" data-figma-node={VOICE_CLONE_PAGE_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={VOICE_CLONE_PAGE_NODE}>
       <div data-figma-node={VOICE_CLONE_FRAME_NODE}>
         <VoiceCloneHeroSection />
         <VoiceStreamMarquee />

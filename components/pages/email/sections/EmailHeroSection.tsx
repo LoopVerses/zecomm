@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { MeshGradient } from "@/components/shared/MeshGradient";
 import { EMAIL_SECTIONS } from "@/lib/email-tokens";
 import { EMAIL_PARCHMENT, EMAIL_PLUM, EMAIL_TERRACOTTA } from "@/lib/email-theme";
 import { ParchmentAmbient } from "../shared/ParchmentAmbient";
@@ -11,11 +12,12 @@ import { EmailSectionReveal } from "../shared/EmailSectionReveal";
 export default function EmailHeroSection() {
   return (
     <section
-      className="relative w-full overflow-hidden py-16 lg:py-20"
+      className="zc-grain relative w-full overflow-x-clip overflow-hidden py-14 sm:py-16 md:py-20 lg:py-24"
       style={{ backgroundColor: EMAIL_PARCHMENT }}
       data-header-surface="light"
       data-figma-node={EMAIL_SECTIONS.hero}
     >
+      <MeshGradient className="opacity-20" />
       <ParchmentAmbient />
 
       <SiteContainer className="relative flex flex-col items-center">

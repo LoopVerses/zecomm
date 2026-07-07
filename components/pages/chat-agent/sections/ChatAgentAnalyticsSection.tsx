@@ -3,9 +3,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
 import { CHAT_AGENT_SECTIONS } from "@/lib/chat-agent-tokens";
 import { CountUp } from "@/components/shared/CountUp";
 import { ChatAgentSectionReveal } from "../shared/ChatAgentSectionReveal";
+
+const GLOWS = ["violet", "cyan", "lime", "red"] as const;
 
 const CHART_BARS = [
   { label: "Legacy Bot", height: 28, node: "6:340" },
@@ -26,31 +29,33 @@ export default function ChatAgentAnalyticsSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-white py-24 lg:py-32"
-      data-header-surface="light"
+      className="relative w-full overflow-x-clip overflow-hidden border-t border-white/10 bg-surface-raised py-14 sm:py-16 md:py-20 lg:py-24"
+      data-header-surface="dark"
       data-figma-node={CHAT_AGENT_SECTIONS.analytics}
     >
+      <SectionAmbience variant="mixed" />
+
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 50% 50%, rgba(28,51,191,0.04) 1px, transparent 1px)",
+            "radial-gradient(circle at 50% 50%, rgba(108,76,241,0.06) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
         aria-hidden
       />
 
-      <SiteContainer>
+      <SiteContainer className="relative z-10">
         <ChatAgentSectionReveal className="text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-brand-blue">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-violet/25 bg-accent-violet/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-accent-violet">
             Performance telemetry
           </span>
           <h2
-            className="font-poppins text-[36px] font-light uppercase leading-[1.1] tracking-[-0.03em] text-gray-900 sm:text-[52px]"
+            className="font-display text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight text-ink-primary"
             data-figma-node="6:322"
           >
             LIVE{" "}
-            <span className="bg-gradient-to-r from-brand-blue to-blue-500 bg-clip-text font-extrabold text-transparent">
+            <span className="bg-gradient-to-r from-accent-violet to-accent-cyan bg-clip-text text-transparent">
               PERFORMANCE.
             </span>
           </h2>
@@ -62,31 +67,34 @@ export default function ChatAgentAnalyticsSection() {
               {METRICS.map((metric, i) => (
                 <motion.div
                   key={metric.node}
-                  className="rounded-2xl border border-gray-100 bg-gray-50/80 p-6 transition-colors hover:border-brand-blue/20 hover:bg-brand-blue/[0.02]"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <div className="flex items-end justify-between">
-                    <p className="font-poppins text-[10px] font-bold uppercase tracking-wider text-gray-600" data-figma-node={metric.node}>
-                      {metric.label}
-                    </p>
-                    <CountUp
-                      value={metric.value}
-                      suffix={metric.suffix}
-                      decimals={metric.decimals}
-                      className="font-poppins text-lg font-extrabold text-brand-blue"
-                    />
-                  </div>
-                  <div className="mt-4 h-2 overflow-hidden rounded-full bg-gray-200">
-                    <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-brand-blue to-blue-400"
-                      initial={{ width: "0%" }}
-                      animate={inView ? { width: `${metric.value}%` } : { width: "0%" }}
-                      transition={{ duration: 0.9, delay: 0.2 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    />
-                  </div>
+                  <EliteCard glow={GLOWS[i % GLOWS.length]}>
+                    <div className="p-6">
+                      <div className="flex items-end justify-between">
+                        <p className="font-poppins text-[10px] font-bold uppercase tracking-wider text-ink-muted" data-figma-node={metric.node}>
+                          {metric.label}
+                        </p>
+                        <CountUp
+                          value={metric.value}
+                          suffix={metric.suffix}
+                          decimals={metric.decimals}
+                          className="font-poppins text-lg font-extrabold text-accent-violet"
+                        />
+                      </div>
+                      <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-accent-violet to-accent-cyan"
+                          initial={{ width: "0%" }}
+                          animate={inView ? { width: `${metric.value}%` } : { width: "0%" }}
+                          transition={{ duration: 0.9, delay: 0.2 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                        />
+                      </div>
+                    </div>
+                  </EliteCard>
                 </motion.div>
               ))}
 
@@ -97,17 +105,20 @@ export default function ChatAgentAnalyticsSection() {
                 ].map((stat, i) => (
                   <motion.div
                     key={stat.node}
-                    className="rounded-2xl border border-gray-100 bg-white p-6 transition-all hover:border-brand-blue/20"
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 + i * 0.1 }}
                     data-figma-node={stat.node}
                   >
-                    <p className="font-poppins text-3xl font-extrabold text-gray-900">{stat.value}</p>
-                    <p className="mt-1 font-poppins text-[9px] font-bold uppercase tracking-wider text-gray-400">
-                      {stat.label}
-                    </p>
+                    <EliteCard glow={GLOWS[(i + 2) % GLOWS.length]}>
+                      <div className="p-6">
+                        <p className="font-poppins text-3xl font-extrabold text-ink-primary">{stat.value}</p>
+                        <p className="mt-1 font-poppins text-[9px] font-bold uppercase tracking-wider text-ink-muted">
+                          {stat.label}
+                        </p>
+                      </div>
+                    </EliteCard>
                   </motion.div>
                 ))}
               </div>
@@ -115,54 +126,53 @@ export default function ChatAgentAnalyticsSection() {
           </ChatAgentSectionReveal>
 
           <ChatAgentSectionReveal delay={0.2}>
-            <div
-              className="overflow-hidden rounded-2xl border border-gray-200 bg-[#0a0f1e] p-8"
-              data-figma-node="6:337"
-            >
-              <p className="font-poppins text-[10px] font-bold uppercase tracking-wider text-brand-blue" data-figma-node="6:338">
-                Conversion Lift (Avg Brand)
-              </p>
-              <p className="mt-1 font-poppins text-xs text-gray-500">Unit 07 vs legacy solutions</p>
+            <EliteCard glow="cyan">
+              <div className="p-8" data-figma-node="6:337">
+                <p className="font-poppins text-[10px] font-bold uppercase tracking-wider text-accent-violet" data-figma-node="6:338">
+                  Conversion Lift (Avg Brand)
+                </p>
+                <p className="mt-1 font-poppins text-xs text-ink-muted">Unit 07 vs legacy solutions</p>
 
-              <div className="mt-10 flex items-end justify-between gap-4" style={{ height: CHART_MAX_PX }}>
-                {CHART_BARS.map((bar, i) => (
-                  <div key={bar.node} className="flex h-full flex-1 flex-col items-center justify-end gap-3">
-                    <motion.span
-                      className="font-poppins text-[10px] font-bold text-brand-blue"
-                      initial={{ opacity: 0 }}
-                      animate={inView ? { opacity: 1 } : { opacity: 0 }}
-                      transition={{ delay: 0.5 + i * 0.12 }}
-                    >
-                      {inView ? `${bar.height}%` : ""}
-                    </motion.span>
-                    <div className="relative w-full flex-1">
-                      <motion.div
-                        className={`absolute bottom-0 w-full rounded-t-lg ${
-                          bar.label === "Unit 07"
-                            ? "bg-gradient-to-t from-brand-blue to-blue-400"
-                            : "bg-white/15"
+                <div className="mt-10 flex items-end justify-between gap-4" style={{ height: CHART_MAX_PX }}>
+                  {CHART_BARS.map((bar, i) => (
+                    <div key={bar.node} className="flex h-full flex-1 flex-col items-center justify-end gap-3">
+                      <motion.span
+                        className="font-poppins text-[10px] font-bold text-accent-violet"
+                        initial={{ opacity: 0 }}
+                        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+                        transition={{ delay: 0.5 + i * 0.12 }}
+                      >
+                        {inView ? `${bar.height}%` : ""}
+                      </motion.span>
+                      <div className="relative w-full flex-1">
+                        <motion.div
+                          className={`absolute bottom-0 w-full rounded-t-lg ${
+                            bar.label === "Unit 07"
+                              ? "bg-gradient-to-t from-accent-violet to-accent-cyan"
+                              : "bg-white/15"
+                          }`}
+                          initial={{ height: 0 }}
+                          animate={
+                            inView
+                              ? { height: (bar.height / 100) * CHART_MAX_PX }
+                              : { height: 0 }
+                          }
+                          transition={{ duration: 0.85, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                          data-figma-node={bar.node}
+                        />
+                      </div>
+                      <span
+                        className={`font-poppins text-[8px] font-bold uppercase tracking-wider ${
+                          bar.label === "Unit 07" ? "text-accent-violet" : "text-ink-muted"
                         }`}
-                        initial={{ height: 0 }}
-                        animate={
-                          inView
-                            ? { height: (bar.height / 100) * CHART_MAX_PX }
-                            : { height: 0 }
-                        }
-                        transition={{ duration: 0.85, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                        data-figma-node={bar.node}
-                      />
+                      >
+                        {bar.label}
+                      </span>
                     </div>
-                    <span
-                      className={`font-poppins text-[8px] font-bold uppercase tracking-wider ${
-                        bar.label === "Unit 07" ? "text-brand-blue" : "text-gray-500"
-                      }`}
-                    >
-                      {bar.label}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            </EliteCard>
           </ChatAgentSectionReveal>
         </div>
       </SiteContainer>

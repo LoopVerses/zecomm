@@ -20,7 +20,7 @@ export const metadata = createPageMetadata("marketIntel");
  */
 export default function MarketIntelPage() {
   return (
-    <PageShell className="bg-transparent" data-figma-node={MARKET_INTEL_PAGE_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={MARKET_INTEL_PAGE_NODE}>
       <div data-figma-node={MARKET_INTEL_FRAME_NODE}>
         <MarketIntelHeroSection />
         <MarketIntelSignalMarquee />

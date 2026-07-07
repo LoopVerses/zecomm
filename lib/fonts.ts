@@ -1,4 +1,12 @@
-import { Inter, Montserrat, Poppins } from "next/font/google";
+import { Inter, Montserrat, Poppins, Syne } from "next/font/google";
+
+/** Expressive display font — kinetic headlines */
+export const syne = Syne({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-syne",
+  display: "swap",
+});
 
 /** Primary UI font — clean readable typography site-wide */
 export const poppins = Poppins({
@@ -47,4 +55,5 @@ export const fontVariables = [
   inter.variable,
   montserrat.variable,
   consolas.variable,
+  syne.variable,
 ].join(" ");

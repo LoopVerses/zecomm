@@ -18,7 +18,7 @@ export const metadata = createPageMetadata("ecom");
 
 export default function EcomPage() {
   return (
-    <PageShell className="bg-transparent" data-figma-node={ECOM_PAGE_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={ECOM_PAGE_NODE}>
       <div data-figma-node={ECOM_FRAME_NODE}>
         <EcomHeroSection />
         <EcomWhySection />

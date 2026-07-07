@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
 import { CountUp } from "@/components/shared/CountUp";
+import { MeshGradient } from "@/components/shared/MeshGradient";
 import { MARKET_INTEL_SECTIONS } from "@/lib/market-intel-tokens";
 import { IntelAmbientBackground } from "../shared/IntelAmbientBackground";
 import { ReconRadarVisual } from "../shared/ReconRadarVisual";
@@ -17,10 +18,11 @@ const HERO_STATS = [
 export default function MarketIntelHeroSection() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#050F0D] pt-24 pb-14 sm:pt-28 sm:pb-16"
+      className="zc-grain relative w-full overflow-x-clip overflow-hidden bg-surface-base pt-[max(5.5rem,calc(4rem+env(safe-area-inset-top,0px)))] pb-14 sm:pt-28 sm:pb-16"
       data-header-surface="dark"
       data-figma-node={MARKET_INTEL_SECTIONS.hero}
     >
+      <MeshGradient />
       <IntelAmbientBackground />
 
       <SiteContainer className="relative z-10">
@@ -54,7 +56,7 @@ export default function MarketIntelHeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-poppins text-[44px] font-light uppercase leading-[0.95] tracking-[-0.03em] text-white sm:text-[68px] lg:text-[84px]"
+            className="font-display text-[clamp(2.5rem,7vw,5rem)] font-bold uppercase leading-[0.95] tracking-tight text-ink-primary"
             data-figma-node="6:894"
           >
             MARKET{" "}
@@ -68,7 +70,7 @@ export default function MarketIntelHeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18 }}
-            className="mx-auto mt-5 max-w-[560px] font-poppins text-sm leading-relaxed text-gray-400 sm:text-[15px]"
+            className="mx-auto mt-5 max-w-[560px] font-poppins text-sm leading-relaxed text-ink-secondary sm:text-[15px]"
             data-figma-node="6:896"
           >
             Track competitors, spot price changes, find trending gaps, and discover keyword
@@ -92,7 +94,7 @@ export default function MarketIntelHeroSection() {
                   decimals={stat.decimals}
                   className="font-poppins text-lg font-extrabold text-emerald-400"
                 />
-                <span className="font-poppins text-[9px] font-bold uppercase tracking-wider text-gray-500">
+                <span className="font-poppins text-[9px] font-bold uppercase tracking-wider text-ink-muted">
                   {stat.label}
                 </span>
               </div>

@@ -21,7 +21,7 @@ export const metadata = createPageMetadata("home");
  */
 export default function LandingPage() {
   return (
-    <PageShell className="bg-[#FAFBFC]" data-figma-node={LANDING_PAGE_FIGMA_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={LANDING_PAGE_FIGMA_NODE}>
       <HeroSection />
       <RealtimeTickerSection />
       <HowItWorksSection />

@@ -20,7 +20,7 @@ export const metadata = createPageMetadata("cloneAgent");
  */
 export default function CloneAgentPage() {
   return (
-    <PageShell className="bg-transparent" data-figma-node={CLONE_AGENT_PAGE_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={CLONE_AGENT_PAGE_NODE}>
       <div data-figma-node={CLONE_AGENT_FRAME_NODE}>
         <CloneAgentHeroSection />
         <CloneSyncMarquee />

@@ -56,7 +56,7 @@ export default function EcomTelemetrySection() {
   return (
     <section
       id="results"
-      className="relative w-full overflow-hidden py-16 sm:py-20"
+      className="relative w-full overflow-x-clip overflow-hidden py-14 sm:py-16 md:py-20 lg:py-24"
       style={{ backgroundColor: "#FAFBFC" }}
       data-header-surface="light"
       data-figma-node={ECOM_SECTIONS.telemetry}

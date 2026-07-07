@@ -18,7 +18,7 @@ export const metadata = createPageMetadata("youtube");
 
 export default function YoutubePage() {
   return (
-    <PageShell className="bg-transparent" data-figma-node={YOUTUBE_PAGE_NODE}>
+    <PageShell className="bg-surface-base" data-figma-node={YOUTUBE_PAGE_NODE}>
       <div data-figma-node={YOUTUBE_FRAME_NODE}>
         <YoutubeHeroSection />
         <YoutubeTickerSection />

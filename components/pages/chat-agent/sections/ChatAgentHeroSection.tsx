@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
 import { CountUp } from "@/components/shared/CountUp";
+import { MeshGradient } from "@/components/shared/MeshGradient";
 import { CHAT_AGENT_SECTIONS } from "@/lib/chat-agent-tokens";
 import { ChatAgentAmbientBackground } from "../shared/ChatAgentAmbientBackground";
 import { SalesCommandDeck } from "../shared/SalesCommandDeck";
@@ -17,17 +18,18 @@ const HERO_STATS = [
 export default function ChatAgentHeroSection() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#060B18] pt-24 pb-12 sm:pt-28 sm:pb-16"
+      className="zc-grain relative w-full overflow-x-clip overflow-hidden bg-surface-base pt-[max(5.5rem,calc(4rem+env(safe-area-inset-top,0px)))] pb-12 sm:pt-28 sm:pb-16"
       data-header-surface="dark"
       data-figma-node={CHAT_AGENT_SECTIONS.hero}
     >
+      <MeshGradient />
       <ChatAgentAmbientBackground />
 
       <SiteContainer className="relative z-10">
         <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 font-poppins text-[10px] font-semibold uppercase tracking-[0.15em] text-white/70 backdrop-blur-sm transition-all hover:border-brand-blue/40 hover:text-white"
+            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 font-poppins text-[10px] font-semibold uppercase tracking-[0.15em] text-ink-secondary backdrop-blur-sm transition-all hover:border-brand-blue/40 hover:text-ink-primary"
             data-figma-node="8:995"
           >
             <span className="transition-transform group-hover:-translate-x-0.5">←</span>
@@ -60,7 +62,7 @@ export default function ChatAgentHeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.28 }}
-            className="font-poppins text-[44px] font-light uppercase leading-[0.95] tracking-[-0.03em] text-white sm:text-[64px] lg:text-[80px]"
+            className="font-display text-[clamp(2.5rem,7vw,5rem)] font-bold uppercase leading-[0.95] tracking-tight text-ink-primary"
             data-figma-node="6:314"
           >
             DON&apos;T CHAT.
@@ -74,7 +76,7 @@ export default function ChatAgentHeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.36 }}
-            className="mx-auto mt-5 max-w-[520px] font-poppins text-sm leading-relaxed text-gray-400 sm:text-[15px]"
+            className="mx-auto mt-5 max-w-[520px] font-poppins text-sm leading-relaxed text-ink-secondary sm:text-[15px]"
             data-figma-node="6:315"
           >
             Reads buyer intent, handles objections, and guides high-ticket visitors to checkout.
@@ -99,7 +101,7 @@ export default function ChatAgentHeroSection() {
                   decimals={stat.decimals}
                   className="font-poppins text-lg font-extrabold text-brand-blue"
                 />
-                <span className="font-poppins text-[9px] font-bold uppercase tracking-wider text-gray-500">
+                <span className="font-poppins text-[9px] font-bold uppercase tracking-wider text-ink-muted">
                   {stat.label}
                 </span>
               </div>

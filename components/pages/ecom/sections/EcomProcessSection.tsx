@@ -3,12 +3,15 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
+import { EASE_OUT } from "@/lib/design-system";
 import { ECOM_SECTIONS } from "@/lib/ecom-tokens";
-import { ECOM_PAGE_BG } from "@/lib/ecom-theme";
+import { ECOM_THEME } from "@/lib/ecom-theme";
 import { ECOM_PROCESS_STEPS } from "@/lib/ecom-content";
-import { HeroAmbientBackground } from "../shared/AmbientBackground";
 import { EcomSectionReveal } from "../shared/EcomSectionReveal";
 import { OmnichannelSyncHub } from "../shared/OmnichannelSyncHub";
+
+const GLOWS = ["violet", "cyan", "lime", "violet"] as const;
 
 export default function EcomProcessSection() {
   const visualRef = useRef<HTMLDivElement>(null);
@@ -17,22 +20,21 @@ export default function EcomProcessSection() {
   return (
     <section
       id="process"
-      className="relative w-full overflow-hidden py-16 sm:py-20 lg:py-24"
-      style={{ backgroundColor: ECOM_PAGE_BG }}
-      data-header-surface="light"
+      className={`relative w-full overflow-x-clip py-14 sm:py-16 md:py-20 lg:py-24 ${ECOM_THEME.bg}`}
+      data-header-surface={ECOM_THEME.surface}
       data-figma-node={ECOM_SECTIONS.process}
     >
-      <HeroAmbientBackground />
+      <SectionAmbience variant="mixed" />
 
-      <SiteContainer className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <SiteContainer className="relative z-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <EcomSectionReveal>
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/15 bg-white px-3 py-1 font-poppins text-[11px] font-semibold text-brand-blue shadow-sm">
-            Our process
-          </span>
-          <h2 className="mt-4 font-poppins text-[clamp(1.75rem,4vw,2.25rem)] font-bold leading-tight text-gray-900">
+          <span className={ECOM_THEME.badge}>Our process</span>
+          <h2
+            className={`mt-4 text-[clamp(1.75rem,4vw,2.25rem)] font-bold leading-tight ${ECOM_THEME.headline} ${ECOM_THEME.text}`}
+          >
             How we work with you
           </h2>
-          <p className="mt-3 font-poppins text-base text-gray-600">
+          <p className={`mt-3 text-base ${ECOM_THEME.textMuted}`}>
             A structured path from consultation to full store management and scaling.
           </p>
 
@@ -44,15 +46,22 @@ export default function EcomProcessSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, delay: index * 0.06 }}
-                className="flex gap-4 rounded-xl border border-gray-200/80 bg-white/90 p-4 backdrop-blur-sm"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-blue font-poppins text-xs font-bold text-white">
-                  {item.step}
-                </span>
-                <div>
-                  <h3 className="font-poppins text-sm font-semibold text-gray-900">{item.title}</h3>
-                  <p className="mt-1 font-poppins text-xs leading-relaxed text-gray-500">{item.description}</p>
-                </div>
+                <EliteCard glow={GLOWS[index % GLOWS.length]} className="rounded-xl">
+                  <div className="flex gap-4 p-4">
+                    <motion.span
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-violet font-poppins text-xs font-bold text-white"
+                      whileHover={{ scale: 1.1, rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {item.step}
+                    </motion.span>
+                    <div>
+                      <h3 className={`text-sm font-semibold ${ECOM_THEME.text}`}>{item.title}</h3>
+                      <p className={`mt-1 text-xs leading-relaxed ${ECOM_THEME.textSubtle}`}>{item.description}</p>
+                    </div>
+                  </div>
+                </EliteCard>
               </motion.div>
             ))}
           </div>
@@ -63,11 +72,14 @@ export default function EcomProcessSection() {
           className="relative flex w-full items-center justify-center"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={visualInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: EASE_OUT }}
+          style={{ perspective: 1200 }}
         >
-          <div className="w-full max-w-[560px] scale-[0.88] sm:scale-95 lg:scale-100">
-            <OmnichannelSyncHub inView={visualInView} />
-          </div>
+          <EliteCard glow="cyan" className="w-full max-w-[560px] scale-[0.88] sm:scale-95 lg:scale-100">
+            <div className="p-4">
+              <OmnichannelSyncHub inView={visualInView} />
+            </div>
+          </EliteCard>
         </motion.div>
       </SiteContainer>
     </section>

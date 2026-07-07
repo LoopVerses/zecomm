@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
 import { CLONE_AGENT_SECTIONS } from "@/lib/clone-agent-tokens";
 import { NeuralSyncDial } from "../shared/NeuralSyncDial";
 import {
@@ -10,6 +11,8 @@ import {
   staggerContainer,
   staggerItem,
 } from "../shared/CloneAgentSectionReveal";
+
+const GLOWS = ["violet", "cyan", "lime", "red"] as const;
 
 const STEPS = [
   {
@@ -45,21 +48,23 @@ export default function CloneAgentSyncSection() {
   return (
     <section
       id="sync"
-      className="w-full border-t border-gray-200 bg-white py-24 lg:py-32"
-      data-header-surface="light"
+      className="relative w-full overflow-x-clip border-t border-white/10 bg-surface-base py-14 sm:py-16 md:py-20 lg:py-24"
+      data-header-surface="dark"
       data-figma-node={CLONE_AGENT_SECTIONS.sync}
     >
-      <SiteContainer>
+      <SectionAmbience variant="mixed" />
+
+      <SiteContainer className="relative z-10">
         <CloneAgentSectionReveal className="text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-brand-blue">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-violet/25 bg-accent-violet/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-accent-violet">
             3-phase neural mapping
           </span>
           <h2
-            className="font-poppins text-[36px] font-light uppercase leading-[1.1] tracking-[-0.03em] text-gray-900 sm:text-[52px]"
+            className="font-display text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight text-ink-primary"
             data-figma-node="6:396"
           >
             NEURAL{" "}
-            <span className="bg-gradient-to-r from-brand-blue to-indigo-500 bg-clip-text font-extrabold text-transparent">
+            <span className="bg-gradient-to-r from-accent-violet to-violet-400 bg-clip-text text-transparent">
               TONE MAPPING.
             </span>
           </h2>
@@ -74,34 +79,32 @@ export default function CloneAgentSyncSection() {
             animate={stepsInView ? "visible" : "hidden"}
           >
             {STEPS.map((step, i) => (
-              <motion.article
-                key={step.node}
-                variants={staggerItem}
-                className="group relative overflow-hidden rounded-r-2xl border-l-4 border-brand-blue bg-[#F3F6FF]/60 py-5 pl-5 pr-4 transition-colors hover:bg-brand-blue/[0.06]"
-                whileHover={{ x: 6 }}
-                data-figma-node={step.node}
-              >
-                <motion.span
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-brand-blue/[0.06] to-transparent opacity-0"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%", opacity: 1 }}
-                  transition={{ duration: 0.55 }}
-                  aria-hidden
-                />
-                <div className="relative flex gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10">
-                    <i className={`${step.icon} text-sm text-brand-blue`} aria-hidden />
-                  </span>
-                  <div>
-                    <h3 className="font-poppins text-[10px] font-bold uppercase tracking-wider text-brand-blue" data-figma-node={step.titleNode}>
-                      0{i + 1}. {step.title}
-                    </h3>
-                    <p className="mt-2 font-poppins text-sm leading-relaxed text-gray-600" data-figma-node={step.bodyNode}>
-                      {step.body}
-                    </p>
+              <motion.div key={step.node} variants={staggerItem} data-figma-node={step.node}>
+                <EliteCard
+                  glow={GLOWS[i % GLOWS.length]}
+                  className="rounded-r-2xl border-l-4 border-accent-violet hover:border-accent-violet/60"
+                >
+                  <div className="group relative py-5 pl-5 pr-4">
+                    <div className="relative flex gap-4">
+                      <motion.span
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-violet/15"
+                        whileHover={{ rotate: [0, -8, 8, 0], scale: 1.08 }}
+                        transition={{ duration: 0.45 }}
+                      >
+                        <i className={`${step.icon} text-sm text-accent-violet`} aria-hidden />
+                      </motion.span>
+                      <div>
+                        <h3 className="font-poppins text-[10px] font-bold uppercase tracking-wider text-accent-violet" data-figma-node={step.titleNode}>
+                          0{i + 1}. {step.title}
+                        </h3>
+                        <p className="mt-2 font-poppins text-sm leading-relaxed text-ink-secondary" data-figma-node={step.bodyNode}>
+                          {step.body}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </motion.article>
+                </EliteCard>
+              </motion.div>
             ))}
           </motion.div>
 

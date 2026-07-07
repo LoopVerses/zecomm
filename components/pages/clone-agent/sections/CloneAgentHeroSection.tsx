@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
 import { CountUp } from "@/components/shared/CountUp";
+import { MeshGradient } from "@/components/shared/MeshGradient";
 import { CLONE_AGENT_SECTIONS } from "@/lib/clone-agent-tokens";
 import { CloneAmbientBackground } from "../shared/CloneAmbientBackground";
 import { IdentityTwinVisual } from "../shared/IdentityTwinVisual";
@@ -17,10 +18,11 @@ const HERO_STATS = [
 export default function CloneAgentHeroSection() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#F3F6FF] pt-24 pb-14 sm:pt-28 sm:pb-16"
+      className="zc-grain relative w-full overflow-x-clip overflow-hidden bg-[#F3F6FF] pt-[max(5.5rem,calc(4rem+env(safe-area-inset-top,0px)))] pb-14 sm:pt-28 sm:pb-16"
       data-header-surface="light"
       data-figma-node={CLONE_AGENT_SECTIONS.hero}
     >
+      <MeshGradient className="opacity-25" />
       <CloneAmbientBackground />
 
       <SiteContainer className="relative z-10">
@@ -55,7 +57,7 @@ export default function CloneAgentHeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-poppins text-[44px] font-light uppercase leading-[0.95] tracking-[-0.03em] text-gray-900 sm:text-[68px] lg:text-[84px]"
+            className="font-poppins text-[44px] font-light uppercase leading-[0.95] tracking-[-0.03em] text-gray-900"
             data-figma-node="6:472"
           >
             THE{" "}

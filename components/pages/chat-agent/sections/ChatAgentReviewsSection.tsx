@@ -3,12 +3,15 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
 import { CHAT_AGENT_SECTIONS } from "@/lib/chat-agent-tokens";
 import {
   ChatAgentSectionReveal,
   staggerContainer,
   staggerItem,
 } from "../shared/ChatAgentSectionReveal";
+
+const GLOWS = ["violet", "cyan", "lime", "red"] as const;
 
 const REVIEWS = [
   {
@@ -46,21 +49,23 @@ export default function ChatAgentReviewsSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden border-t border-gray-100 bg-gray-50 py-24 lg:py-32"
-      data-header-surface="light"
+      className="relative w-full overflow-x-clip overflow-hidden border-t border-white/10 bg-surface-base py-14 sm:py-16 md:py-20 lg:py-24"
+      data-header-surface="dark"
       data-figma-node={CHAT_AGENT_SECTIONS.reviews}
     >
-      <SiteContainer>
+      <SectionAmbience variant="mixed" />
+
+      <SiteContainer className="relative z-10">
         <ChatAgentSectionReveal className="text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-brand-blue shadow-sm">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-violet/25 bg-accent-violet/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-accent-violet">
             Client verdicts
           </span>
           <h2
-            className="font-poppins text-[36px] font-light uppercase leading-[1.1] tracking-[-0.03em] text-gray-900 sm:text-[52px]"
+            className="font-display text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight text-ink-primary"
             data-figma-node="6:346"
           >
             THE{" "}
-            <span className="bg-gradient-to-r from-brand-blue to-blue-500 bg-clip-text font-extrabold text-transparent">
+            <span className="bg-gradient-to-r from-accent-violet to-accent-cyan bg-clip-text text-transparent">
               VERDICT.
             </span>
           </h2>
@@ -73,48 +78,39 @@ export default function ChatAgentReviewsSection() {
           initial="hidden"
           animate={gridInView ? "visible" : "hidden"}
         >
-          {REVIEWS.map((review) => (
-            <motion.article
-              key={review.card}
-              variants={staggerItem}
-              className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-8 transition-all duration-300 hover:border-brand-blue/25"
-              whileHover={{ y: -4 }}
-              data-figma-node={review.card}
-            >
-              <motion.span
-                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-brand-blue/[0.06] to-transparent opacity-0"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%", opacity: 1 }}
-                transition={{ duration: 0.55 }}
-                aria-hidden
-              />
-              <div className="relative">
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-0.5 text-brand-blue">
-                    {[...Array(5)].map((_, i) => (
-                      <i key={i} className="fas fa-star text-xs" aria-hidden />
-                    ))}
-                  </div>
-                  <span className="rounded-full border border-brand-blue/20 bg-brand-blue/5 px-2.5 py-1 font-poppins text-[8px] font-bold uppercase text-brand-blue">
-                    {review.metric}
-                  </span>
-                </div>
-                <p className="mt-6 font-poppins text-sm leading-relaxed text-gray-600" data-figma-node={review.quote}>
-                  <span className="text-brand-blue/40">&ldquo;</span>
-                  {review.text}
-                  <span className="text-brand-blue/40">&rdquo;</span>
-                </p>
-                <div className="mt-8 flex items-center gap-3 border-t border-gray-100 pt-6">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue font-poppins text-xs font-bold text-white">
-                    {review.initialsText}
-                  </div>
-                  <div>
-                    <p className="font-poppins text-xs font-bold uppercase text-gray-900">{review.author}</p>
-                    <p className="font-poppins text-[9px] uppercase tracking-wider text-gray-500">{review.roleText}</p>
+          {REVIEWS.map((review, i) => (
+            <motion.div key={review.card} variants={staggerItem} className="h-full" data-figma-node={review.card}>
+              <EliteCard glow={GLOWS[i % GLOWS.length]} className="h-full">
+                <div className="group relative p-8">
+                  <div className="relative">
+                    <div className="flex items-center justify-between">
+                      <div className="flex gap-0.5 text-accent-lime">
+                        {[...Array(5)].map((_, j) => (
+                          <i key={j} className="fas fa-star text-xs" aria-hidden />
+                        ))}
+                      </div>
+                      <span className="rounded-full border border-accent-violet/25 bg-accent-violet/10 px-2.5 py-1 font-poppins text-[8px] font-bold uppercase text-accent-violet">
+                        {review.metric}
+                      </span>
+                    </div>
+                    <p className="mt-6 font-poppins text-sm leading-relaxed text-ink-secondary" data-figma-node={review.quote}>
+                      <span className="text-accent-violet/40">&ldquo;</span>
+                      {review.text}
+                      <span className="text-accent-violet/40">&rdquo;</span>
+                    </p>
+                    <div className="mt-8 flex items-center gap-3 border-t border-white/10 pt-6">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-accent-violet to-accent-cyan font-poppins text-xs font-bold text-white">
+                        {review.initialsText}
+                      </div>
+                      <div>
+                        <p className="font-poppins text-xs font-bold uppercase text-ink-primary">{review.author}</p>
+                        <p className="font-poppins text-[9px] uppercase tracking-wider text-ink-muted">{review.roleText}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.article>
+              </EliteCard>
+            </motion.div>
           ))}
         </motion.div>
       </SiteContainer>

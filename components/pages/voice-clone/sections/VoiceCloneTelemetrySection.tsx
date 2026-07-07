@@ -3,9 +3,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { EliteCard, SectionAmbience } from "@/components/shared/EliteCard";
 import { CountUp } from "@/components/shared/CountUp";
 import { VOICE_CLONE_SECTIONS } from "@/lib/voice-clone-tokens";
 import { VoiceCloneSectionReveal, staggerContainer, staggerItem } from "../shared/VoiceCloneSectionReveal";
+
+const GLOWS = ["violet", "cyan", "lime", "red"] as const;
 
 const METRICS = [
   { value: 0.3, suffix: "s", decimals: 1, label: "Avg synthesis", desc: "Text to HD audio output", isCount: true },
@@ -19,21 +22,23 @@ export default function VoiceCloneTelemetrySection() {
 
   return (
     <section
-      className="w-full bg-white py-24 lg:py-32"
-      data-header-surface="light"
+      className="relative w-full overflow-x-clip border-t border-white/10 bg-surface-raised py-14 sm:py-16 md:py-20 lg:py-24"
+      data-header-surface="dark"
       data-figma-node={VOICE_CLONE_SECTIONS.telemetry}
     >
-      <SiteContainer>
+      <SectionAmbience variant="mixed" />
+
+      <SiteContainer className="relative z-10">
         <VoiceCloneSectionReveal className="text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/5 px-4 py-1.5 font-poppins text-[9px] font-bold uppercase tracking-[0.25em] text-orange-600">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-violet/25 bg-accent-violet/10 px-4 py-1.5 font-poppins text-[11px] font-semibold text-accent-violet">
             Performance telemetry
           </span>
           <h2
-            className="font-poppins text-[36px] font-light uppercase tracking-[-0.03em] text-gray-900 sm:text-[52px]"
+            className="font-display text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight text-ink-primary"
             data-figma-node="6:703"
           >
             UNIT{" "}
-            <span className="bg-gradient-to-r from-orange-500 to-violet-500 bg-clip-text font-extrabold text-transparent">
+            <span className="bg-gradient-to-r from-accent-violet to-violet-400 bg-clip-text text-transparent">
               TELEMETRY.
             </span>
           </h2>
@@ -46,37 +51,29 @@ export default function VoiceCloneTelemetrySection() {
           initial="hidden"
           animate={gridInView ? "visible" : "hidden"}
         >
-          {METRICS.map((metric) => (
-            <motion.article
-              key={metric.label}
-              variants={staggerItem}
-              className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-orange-50/30 p-8 text-center transition-all hover:border-orange-500/25"
-              whileHover={{ y: -4 }}
-            >
-              <motion.span
-                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-orange-500/[0.05] to-transparent opacity-0"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%", opacity: 1 }}
-                transition={{ duration: 0.55 }}
-                aria-hidden
-              />
-              <div className="relative">
-                {metric.isCount ? (
-                  <CountUp
-                    value={metric.value}
-                    suffix={metric.suffix}
-                    decimals={metric.decimals}
-                    className="font-poppins text-4xl font-extrabold text-orange-500 sm:text-5xl"
-                  />
-                ) : (
-                  <p className="font-poppins text-4xl font-extrabold text-orange-500 sm:text-5xl">{metric.display}</p>
-                )}
-                <p className="mt-2 font-poppins text-[10px] font-bold uppercase tracking-wider text-gray-600">
-                  {metric.label}
-                </p>
-                <p className="mt-2 font-poppins text-xs text-gray-500">{metric.desc}</p>
-              </div>
-            </motion.article>
+          {METRICS.map((metric, i) => (
+            <motion.div key={metric.label} variants={staggerItem} className="h-full">
+              <EliteCard glow={GLOWS[i % GLOWS.length]} className="h-full">
+                <div className="group relative p-8 text-center">
+                  <div className="relative">
+                    {metric.isCount ? (
+                      <CountUp
+                        value={metric.value}
+                        suffix={metric.suffix}
+                        decimals={metric.decimals}
+                        className="font-poppins text-4xl font-extrabold text-accent-violet sm:text-5xl"
+                      />
+                    ) : (
+                      <p className="font-poppins text-4xl font-extrabold text-accent-violet sm:text-5xl">{metric.display}</p>
+                    )}
+                    <p className="mt-2 font-poppins text-[10px] font-bold uppercase tracking-wider text-ink-muted">
+                      {metric.label}
+                    </p>
+                    <p className="mt-2 font-poppins text-xs text-ink-secondary">{metric.desc}</p>
+                  </div>
+                </div>
+              </EliteCard>
+            </motion.div>
           ))}
         </motion.div>
       </SiteContainer>
