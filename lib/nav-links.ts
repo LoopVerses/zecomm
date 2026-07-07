@@ -7,6 +7,32 @@ export const NAV_LINKS = [
   { label: "CONTACT", href: "/services#contact", id: "06", title: "Contact Us" },
 ] as const;
 
+const SERVICES_ANCHOR_HASHES = ["#services-list", "#contact"] as const;
+
+export function isNavLinkActive(pathname: string, href: string, hash = "") {
+  const hashIndex = href.indexOf("#");
+  const basePath = hashIndex === -1 ? href : href.slice(0, hashIndex) || "/";
+  const expectedHash = hashIndex === -1 ? "" : `#${href.slice(hashIndex + 1)}`;
+
+  if (basePath === "/") {
+    if (pathname !== "/") return false;
+    return expectedHash ? hash === expectedHash : true;
+  }
+
+  const onPage = pathname === basePath || pathname.startsWith(`${basePath}/`);
+  if (!onPage) return false;
+
+  if (expectedHash) {
+    return hash === expectedHash;
+  }
+
+  if (basePath === "/services") {
+    return !hash || !SERVICES_ANCHOR_HASHES.includes(hash as (typeof SERVICES_ANCHOR_HASHES)[number]);
+  }
+
+  return true;
+}
+
 export const HERO_NAV_CHIPS = [
   { label: "Home Page", href: "/", icon: "fas fa-home", accent: "text-accent-violet" },
   { label: "Ecommerce Automation", href: "/ecom", icon: "fas fa-store", accent: "text-accent-cyan" },

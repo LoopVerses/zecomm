@@ -5,18 +5,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { SiteContainer } from "@/components/layout/SiteContainer";
-import { NAV_LINKS } from "@/lib/nav-links";
+import { NAV_LINKS, isNavLinkActive } from "@/lib/nav-links";
 import { useHeaderSurface, type HeaderSurface } from "@/lib/useHeaderSurface";
 
 const FIGMA_NODE_ID = "7:961";
-
-function isNavActive(pathname: string, href: string) {
-  const path = href.split("#")[0] || "/";
-  if (path === "/") {
-    return pathname === "/";
-  }
-  return pathname === path || pathname.startsWith(`${path}/`);
-}
 
 function StaggerNavText({
   label,
@@ -220,8 +212,16 @@ export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeHash, setActiveHash] = useState("");
   const surface = useHeaderSurface(80);
   const isLight = surface === "light";
+
+  useEffect(() => {
+    const syncHash = () => setActiveHash(window.location.hash);
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -282,7 +282,7 @@ export default function Header() {
                 <NavLink
                   href={link.href}
                   label={link.label}
-                  active={isNavActive(pathname, link.href)}
+                  active={isNavLinkActive(pathname, link.href, activeHash)}
                   surface={surface}
                 />
               </li>
@@ -364,7 +364,7 @@ export default function Header() {
                       <NavLink
                         href={link.href}
                         label={link.title}
-                        active={isNavActive(pathname, link.href)}
+                        active={isNavLinkActive(pathname, link.href, activeHash)}
                         surface={surface}
                         onClick={() => setMenuOpen(false)}
                         mobile
