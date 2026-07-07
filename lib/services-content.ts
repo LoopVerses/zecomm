@@ -1,5 +1,5 @@
 import type { StoreBrandId } from "@/components/pages/ecom/shared/StoreBrandLogos";
-import { HEAD_OFFICE, HEAD_OFFICE_MAPS_URL } from "@/lib/company-info";
+import { CONTACT_EMAIL, COMPANY_OFFICES, getOfficeFull, getOfficeMapsUrl } from "@/lib/company-info";
 
 export type ServiceGlow = "violet" | "cyan" | "lime" | "red";
 
@@ -139,8 +139,8 @@ export const CONTACT_OPTIONS = [
   {
     icon: "fas fa-envelope",
     title: "Email us",
-    detail: "hello@zeecom.com",
-    href: "mailto:hello@zeecom.com",
+    detail: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
     glow: "violet" as const,
   },
   {
@@ -152,9 +152,16 @@ export const CONTACT_OPTIONS = [
   },
   {
     icon: "fas fa-map-marker-alt",
-    title: HEAD_OFFICE.label,
-    detail: `${HEAD_OFFICE.street}, ${HEAD_OFFICE.city}, ${HEAD_OFFICE.province} ${HEAD_OFFICE.postalCode}`,
-    href: HEAD_OFFICE_MAPS_URL,
+    title: COMPANY_OFFICES[0].label,
+    detail: getOfficeFull(COMPANY_OFFICES[0]),
+    href: getOfficeMapsUrl(COMPANY_OFFICES[0]),
+    glow: "cyan" as const,
+  },
+  {
+    icon: "fas fa-map-marker-alt",
+    title: COMPANY_OFFICES[1].label,
+    detail: getOfficeFull(COMPANY_OFFICES[1]),
+    href: getOfficeMapsUrl(COMPANY_OFFICES[1]),
     glow: "cyan" as const,
   },
   {

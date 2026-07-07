@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { SiteContainer } from "@/components/layout/SiteContainer";
-import { HEAD_OFFICE_LINES, HEAD_OFFICE_MAPS_URL } from "@/lib/company-info";
+import { COMPANY_OFFICES, getOfficeLines, getOfficeMapsUrl } from "@/lib/company-info";
 import { FOOTER_COMPANY_LINKS, FOOTER_SERVICE_LINKS } from "@/lib/nav-links";
 
 const FIGMA_NODE_ID = "6:112";
@@ -28,23 +28,27 @@ export default function Footer() {
             >
               View all services
             </Link>
-            <address className="mt-6 not-italic">
-              <p className="font-poppins text-xs font-semibold uppercase tracking-wider text-ink-muted">
-                Head Office
-              </p>
-              <a
-                href={HEAD_OFFICE_MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 block font-poppins text-sm leading-relaxed text-ink-secondary transition-colors hover:text-accent-violet"
-              >
-                {HEAD_OFFICE_LINES.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </a>
-            </address>
+            <div className="mt-6 space-y-5">
+              {COMPANY_OFFICES.map((office) => (
+                <address key={office.label} className="not-italic">
+                  <p className="font-poppins text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                    {office.label}
+                  </p>
+                  <a
+                    href={getOfficeMapsUrl(office)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 block font-poppins text-sm leading-relaxed text-ink-secondary transition-colors hover:text-accent-violet"
+                  >
+                    {getOfficeLines(office).map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </a>
+                </address>
+              ))}
+            </div>
           </div>
 
           <div className="lg:col-span-4">
