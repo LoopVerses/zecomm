@@ -149,7 +149,7 @@ export default function YoutubeHeroSection() {
               className="flex flex-col gap-4 sm:flex-row sm:items-center"
             >
               <Link
-                href="/services#contact"
+                href="/contact"
                 className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl bg-red-600 px-8 font-poppins text-sm font-semibold text-white shadow-[0_8px_32px_rgba(220,38,38,0.35)] transition-all hover:scale-[1.02] hover:bg-red-500"
                 data-figma-node="6:211"
               >
@@ -157,7 +157,7 @@ export default function YoutubeHeroSection() {
                 <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-rose-400 opacity-0 transition-opacity group-hover:opacity-100" />
               </Link>
               <Link
-                href="/services#contact"
+                href="/contact"
                 className="inline-flex h-12 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 font-poppins text-sm font-semibold text-ink-primary transition-all hover:border-red-500/40 hover:bg-white/10"
               >
                 Book a Free Consultation

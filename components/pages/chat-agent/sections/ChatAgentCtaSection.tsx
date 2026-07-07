@@ -62,7 +62,7 @@ export default function ChatAgentCtaSection() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
               <Link
-                href="/services#contact"
+                href="/contact"
                 className="zc-focus-ring inline-flex h-11 w-full items-center sm:h-12 sm:w-auto justify-center rounded-xl bg-accent-violet px-8 font-poppins text-sm font-semibold text-white shadow-glow transition-all hover:scale-[1.02]"
                 data-figma-node="6:376"
               >

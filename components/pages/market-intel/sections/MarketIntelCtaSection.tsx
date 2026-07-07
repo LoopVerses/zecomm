@@ -56,7 +56,7 @@ export default function MarketIntelCtaSection() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
               <Link
-                href="/services#contact"
+                href="/contact"
                 className="zc-focus-ring inline-flex h-11 w-full items-center sm:h-12 sm:w-auto justify-center rounded-xl bg-accent-cyan px-8 font-poppins text-sm font-semibold text-surface-base shadow-[0_8px_32px_rgba(34,211,238,0.25)] transition-all hover:scale-[1.02]"
               >
                 Deploy Search Node

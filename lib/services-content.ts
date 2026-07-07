@@ -168,7 +168,7 @@ export const CONTACT_OPTIONS = [
     icon: "fas fa-calendar-check",
     title: "Book a call",
     detail: "Free consultation",
-    href: "/services#contact",
+    href: "/contact",
     glow: "violet" as const,
   },
 ] as const;

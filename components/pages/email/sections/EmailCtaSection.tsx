@@ -51,7 +51,7 @@ export default function EmailCtaSection() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
               <Link
-                href="/services#contact"
+                href="/contact"
                 className="zc-focus-ring inline-flex h-11 w-full items-center sm:h-12 sm:w-auto justify-center rounded-xl bg-orange-500 px-10 font-poppins text-sm font-semibold text-white shadow-[0_8px_32px_rgba(234,88,12,0.35)] transition-all hover:bg-orange-400"
               >
                 Deploy Unit 06

@@ -215,7 +215,7 @@ export default function WhatsappRecoverySection() {
             Ready to recover lost revenue on autopilot?
           </p>
           <Link
-            href="/services#contact"
+            href="/contact"
             className="zc-focus-ring mt-6 inline-flex items-center justify-center rounded-xl bg-emerald-500 px-10 py-4 font-poppins text-[10px] font-bold uppercase tracking-[0.25em] text-white shadow-[0_8px_28px_rgba(34,197,94,0.3)] transition-all hover:bg-emerald-400"
           >
             Activate WA-Z Node 01

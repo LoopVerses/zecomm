@@ -53,6 +53,11 @@ export const PAGE_METADATA = {
     description:
       "Explore Zeecom automation services: e-commerce, YouTube, WhatsApp, chat, email, voice, market intel, and more.",
   },
+  contact: {
+    title: "Contact Us",
+    description:
+      "Get in touch with Zeecom Automations. Book a free consultation for e-commerce, AI, and YouTube automation.",
+  },
 } as const;
 
 export type PageMetadataKey = keyof typeof PAGE_METADATA;

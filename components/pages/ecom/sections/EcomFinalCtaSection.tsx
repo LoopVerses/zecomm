@@ -55,7 +55,7 @@ export default function EcomFinalCtaSection() {
 
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
-                  href="/services#contact"
+                  href="/contact"
                   className="zc-focus-ring group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-xl bg-accent-violet px-8 font-poppins text-sm font-semibold text-white shadow-glow transition-all hover:scale-[1.02] sm:w-auto sm:min-w-[220px]"
                   data-figma-node="6:582"
                 >

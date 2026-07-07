@@ -53,7 +53,7 @@ export default function LandingCtaSection() {
                   <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan/0 via-white/10 to-accent-cyan/0 opacity-0 transition-opacity group-hover:opacity-100" />
                 </Link>
                 <Link
-                  href="/services#contact"
+                  href="/contact"
                   className="zc-focus-ring inline-flex h-11 w-full items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 font-poppins text-sm font-semibold text-ink-primary transition-all hover:border-accent-violet/40 hover:bg-accent-violet/10 sm:h-12 sm:w-auto sm:min-w-[200px]"
                 >
                   Contact us

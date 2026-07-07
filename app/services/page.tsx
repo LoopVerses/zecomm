@@ -1,6 +1,6 @@
 import { PageShell } from "@/components/layout/SiteContainer";
 import {
-  ServicesContactSection,
+  ServicesCtaSection,
   ServicesGridSection,
   ServicesHeroSection,
   ServicesPlatformsSection,
@@ -15,7 +15,7 @@ export default function ServicesPage() {
       <ServicesHeroSection />
       <ServicesGridSection />
       <ServicesPlatformsSection />
-      <ServicesContactSection />
+      <ServicesCtaSection />
     </PageShell>
   );
 }

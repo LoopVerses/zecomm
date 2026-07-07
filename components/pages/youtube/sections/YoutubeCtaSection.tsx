@@ -56,7 +56,7 @@ export default function YoutubeCtaSection() {
 
               <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                 <Link
-                  href="/services#contact"
+                  href="/contact"
                   className="group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-xl bg-red-600 px-8 font-poppins text-sm font-semibold text-white shadow-[0_8px_32px_rgba(220,38,38,0.35)] transition-all hover:scale-[1.02] hover:bg-red-500 sm:w-auto sm:min-w-[220px]"
                   data-figma-node="6:268"
                 >

@@ -212,16 +212,8 @@ export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeHash, setActiveHash] = useState("");
   const surface = useHeaderSurface(80);
   const isLight = surface === "light";
-
-  useEffect(() => {
-    const syncHash = () => setActiveHash(window.location.hash);
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -282,7 +274,7 @@ export default function Header() {
                 <NavLink
                   href={link.href}
                   label={link.label}
-                  active={isNavLinkActive(pathname, link.href, activeHash)}
+                  active={isNavLinkActive(pathname, link.href)}
                   surface={surface}
                 />
               </li>
@@ -364,7 +356,7 @@ export default function Header() {
                       <NavLink
                         href={link.href}
                         label={link.title}
-                        active={isNavLinkActive(pathname, link.href, activeHash)}
+                        active={isNavLinkActive(pathname, link.href)}
                         surface={surface}
                         onClick={() => setMenuOpen(false)}
                         mobile
