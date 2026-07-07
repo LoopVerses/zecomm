@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-export const SITE_NAME = "Zeecom";
+export const SITE_NAME = "Zeecom Automations";
 
 export const PAGE_METADATA = {
   home: {
-    title: "Zeecomm AI Platform",
+    title: "Zeecom Automations",
     description:
       "AI tools for e-commerce, WhatsApp, email, YouTube, and more. Automate sales, support, and content from one place.",
   },

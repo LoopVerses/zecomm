@@ -8,7 +8,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_NAME} | AI Platform`,
+    default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
   },
   description:

@@ -8,18 +8,13 @@ import { LiveAgentPanel } from "@/components/shared/LiveAgentPanel";
 import { MeshGradient } from "@/components/shared/MeshGradient";
 import { EASE_OUT } from "@/lib/design-system";
 import { LANDING_BG } from "@/lib/landing-theme";
+import { HERO_NAV_CHIPS } from "@/lib/nav-links";
 
 export const HERO_FIGMA_NODE = "6:83";
 
 const HEADLINE_WORDS = ["Smart", "automation", "for", "every", "part", "of", "your", "business"] as const;
 
 const GRADIENT_WORDS = new Set(["automation", "every"]);
-
-const PLATFORM_CHIPS = [
-  { label: "E-Commerce", icon: "fas fa-store", accent: "text-accent-cyan" },
-  { label: "YouTube", icon: "fab fa-youtube", accent: "text-red-400" },
-  { label: "AI Agents", icon: "fas fa-bolt", accent: "text-accent-lime" },
-] as const;
 
 function EliteHeroBadge() {
   return (
@@ -59,26 +54,33 @@ function EliteHeroBadge() {
         </div>
 
         {/* Brand line */}
-        <p className="relative mt-3 font-display text-sm font-bold leading-snug text-ink-primary sm:text-base">
+        <p className="relative mt-3 font-display text-[13px] font-bold leading-snug text-ink-primary sm:text-sm">
           <span className="bg-gradient-to-r from-accent-violet to-accent-cyan bg-clip-text text-transparent">
-            Zero Effort
-          </span>{" "}
-          Ecommerce Automations Solutions
+            Zeecom Automations
+          </span>
+          <span className="text-ink-primary"> — </span>
+          <span className="font-poppins text-[11px] font-medium leading-relaxed text-ink-secondary sm:text-xs">
+            Automating E-Commerce, AI Systems, and YouTube Growth Under One Roof
+          </span>
         </p>
 
-        {/* Platform chips */}
-        <div className="relative mt-3 flex flex-wrap gap-2">
-          {PLATFORM_CHIPS.map((chip, i) => (
-            <motion.span
+        {/* Nav chips */}
+        <div className="relative mt-3 flex flex-wrap gap-1.5 sm:gap-2">
+          {HERO_NAV_CHIPS.map((chip, i) => (
+            <motion.div
               key={chip.label}
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.25 + i * 0.08, duration: 0.35 }}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-white/8 bg-surface-base/60 px-2.5 py-1.5 font-poppins text-[10px] font-medium text-ink-secondary"
+              transition={{ delay: 0.25 + i * 0.05, duration: 0.35 }}
             >
-              <i className={`${chip.icon} text-[9px] ${chip.accent}`} aria-hidden />
-              {chip.label}
-            </motion.span>
+              <Link
+                href={chip.href}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/8 bg-surface-base/60 px-2 py-1.5 font-poppins text-[9px] font-medium text-ink-secondary transition-all hover:border-accent-violet/30 hover:bg-accent-violet/10 hover:text-ink-primary sm:px-2.5 sm:text-[10px]"
+              >
+                <i className={`${chip.icon} text-[8px] sm:text-[9px] ${chip.accent}`} aria-hidden />
+                {chip.label}
+              </Link>
+            </motion.div>
           ))}
         </div>
 

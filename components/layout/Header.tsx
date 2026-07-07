@@ -11,10 +11,11 @@ import { useHeaderSurface, type HeaderSurface } from "@/lib/useHeaderSurface";
 const FIGMA_NODE_ID = "7:961";
 
 function isNavActive(pathname: string, href: string) {
-  if (href === "/") {
+  const path = href.split("#")[0] || "/";
+  if (path === "/") {
     return pathname === "/";
   }
-  return pathname === href || pathname.startsWith(`${href}/`);
+  return pathname === path || pathname.startsWith(`${path}/`);
 }
 
 function StaggerNavText({
@@ -271,11 +272,11 @@ export default function Header() {
         <Logo surface={surface} />
 
         <nav
-          className="hidden min-w-0 flex-1 items-center justify-end gap-5 lg:flex"
+          className="hidden min-w-0 flex-1 items-center justify-end gap-2 xl:gap-3 lg:flex"
           data-figma-node="7:972"
           aria-label="Main navigation"
         >
-          <ul className="flex min-w-0 items-center gap-1" data-figma-node="7:973">
+          <ul className="flex min-w-0 flex-wrap items-center justify-end gap-0.5" data-figma-node="7:973">
             {NAV_LINKS.map((link) => (
               <li key={link.href} className="flex shrink-0 items-center">
                 <NavLink
@@ -287,12 +288,6 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <Link
-            href="/services#contact"
-            className="hidden shrink-0 rounded-xl bg-accent-violet px-4 py-2 font-poppins text-[11px] font-semibold text-white shadow-glow transition-all hover:scale-[1.02] sm:inline-flex"
-          >
-            Contact
-          </Link>
           <LiveStatusBadge surface={surface} />
         </nav>
 
@@ -368,7 +363,7 @@ export default function Header() {
                     >
                       <NavLink
                         href={link.href}
-                        label={link.label}
+                        label={link.title}
                         active={isNavActive(pathname, link.href)}
                         surface={surface}
                         onClick={() => setMenuOpen(false)}
@@ -378,18 +373,11 @@ export default function Header() {
                   ))}
                 </ul>
 
-                <div className="mt-6 flex flex-col gap-2.5 border-t border-black/5 pt-5 dark:border-white/10">
-                  <Link
-                    href="/services#contact"
-                    onClick={() => setMenuOpen(false)}
-                    className="inline-flex h-11 items-center justify-center rounded-xl bg-accent-violet font-poppins text-sm font-semibold text-white transition-colors hover:bg-accent-violet/90"
-                  >
-                    Contact Us
-                  </Link>
+                <div className="mt-6 border-t border-black/5 pt-5 dark:border-white/10">
                   <Link
                     href="/services"
                     onClick={() => setMenuOpen(false)}
-                    className={`inline-flex h-11 items-center justify-center rounded-xl border font-poppins text-sm font-semibold transition-colors ${
+                    className={`inline-flex h-11 w-full items-center justify-center rounded-xl border font-poppins text-sm font-semibold transition-colors ${
                       isLight
                         ? "border-gray-200 bg-white text-gray-700 hover:border-accent-violet/30 hover:text-accent-violet"
                         : "border-white/15 bg-white/5 text-white hover:border-accent-violet/40"
